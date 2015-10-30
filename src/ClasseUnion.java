@@ -53,7 +53,7 @@ public class ClasseUnion {
 			}
 			union(c1,c1-11);		
 		}else{
-			if( c1 mod 11 == 1)
+			if( (c1 % 11) == 1)
 			{  
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
@@ -64,7 +64,7 @@ public class ClasseUnion {
 					union(c1,c1+1);
 				}
 				
-			}else if( c1 mod 11 ==0 )
+			}else if( (c1 % 11) ==0 )
 			{
 				if(classes_[c1-1]!=NON_ATTRIBUE)
 				{
@@ -113,7 +113,7 @@ public class ClasseUnion {
         c1 = classe(c1);
         c2 = classe(c2);
         if(c1 != c2){
-            classes_[c1].setPere(classes_[c2]);
+            classes_[c1].setPere_(classes_[c2]);
         }
     }
 
@@ -124,9 +124,9 @@ public class ClasseUnion {
      */
     public int classe(int c){
         Arbre ac = classes_[c];
-        while(ac.getPere_!=null) {
-            ac = ac.getPere_;
+        while(ac.getPere_()!=null) {
+            ac = ac.getPere_();
         }
-        return ac.getElt_;
+        return ac.getElt_();
     }
 }

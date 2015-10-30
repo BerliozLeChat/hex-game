@@ -15,7 +15,7 @@ public class Plateau {
         }
     }
 
-    public Case[][] getPlateau_() {
+    public boolean[][] getPlateau_() {
         return plateau_;
     }
 
