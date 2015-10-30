@@ -3,8 +3,10 @@
  */
 public class Arbre {
     private Arbre pere_;
+    private int elt_
 
-    public Arbre(Arbre pere){
+    public Arbre(Arbre pere, int elt){
+        elt_ = elt;
         pere_ = pere;
     }
 
@@ -14,5 +16,9 @@ public class Arbre {
 
     public void setPere_(Arbre pere_) {
         this.pere_ = pere_;
+    }
+
+    public int getElt_() {
+        return elt_;
     }
 }
