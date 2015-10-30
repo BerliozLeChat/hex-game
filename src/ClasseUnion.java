@@ -42,73 +42,65 @@ public class ClasseUnion {
 			classes_[c1] = new Arbre(null,c1);
 		if(c1>-1&&c1<11){
 			union(c1,EXTREME1);
+			if(!(c1 == 0)){
+				union(c1,c1+10);
+			}
+			union(c1,c1+11);		
 		}else if (c1>109&&c1<121){
 			union(c1,EXTREME2);
+			if(!(c1 == 120)){
+				union(c1,c1-10);
+			}
+			union(c1,c1-11);		
 		}else{
-			if( c1 mod 10 == 1)
+			if( c1 mod 11 == 1)
 			{  
-				if(classes_[c1+10]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1+10]);
-				}
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1-10]);
-				}
-				if(classes_[c1-9]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1-9]);
+					union(c1,c1-10);
 				}
 				if(classes_[c1+1]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1+1]);
+					union(c1,c1+1);
 				}
 				
-			}else if( c1 mod 10 ==0 )
+			}else if( c1 mod 11 ==0 )
 			{
-				if(classes_[c1-10]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1-10]);
-				}
 				if(classes_[c1-1]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1-1]);
-				}
-				if(classes_[c1+9]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1+9]);
+					union(c1,c1-1);
 				}
 				if(classes_[c1+10]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1+10]);
+					union(c1,c1+10);
 				}
 			}else
 			{
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1-10]);
-				}
-				if(classes_[c1-9]!=NON_ATTRIBUE)
-				{
-					union(c1,class_[c1-9]);
+					union(c1,c1-10);
 				}
 				if(classes_[c1-1]!=NON_ATTRIBUE)
 				{
-					union(c1,class_[c1-1]);
+					union(c1,c1-1);
 				}
 				if(classes_[c1+1]!=NON_ATTRIBUE)
 				{
-					union(c1,class_[c1+1]);
-				}
-				if(classes_[c1+9]!=NON_ATTRIBUE)
-				{
-					union(c1,class_[c1+9]);
+					union(c1,c1+1);
 				}
 				if(classes_[c1+10]!=NON_ATTRIBUE)
 				{
-					union(c1,class_[c1+10]);
-				}	
+					union(c1,c1+10);
+				}
 			}
+			if(classes_[c1-11]!=NON_ATTRIBUE)
+			{
+				union(c1,c1-11);
+			}
+			if(classes_[c1+11]!=NON_ATTRIBUE)
+			{
+				union(c1,c1+11);
+			}	
 		}	
     }
 
