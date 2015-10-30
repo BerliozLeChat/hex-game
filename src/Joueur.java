@@ -29,7 +29,10 @@ public class Joueur {
 
 	public void jouer(int c1)
 	{
+		System.out.println(c1);
+
 		ClasseUnion_.unionAdjacentes(c1);
+		System.out.println("Beuggg4");
 		if ( ClasseUnion_.classe(121)==ClasseUnion_.classe(122))
 		{
 			fini_= true;

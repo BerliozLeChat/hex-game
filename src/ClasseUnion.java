@@ -39,9 +39,13 @@ public class ClasseUnion {
      * @param c1 le pion posé
      */
     public void unionAdjacentes(int c1){
-			classes_[c1] = new Arbre(null,c1);
+		System.out.println("Bon coté1");
+		classes_[c1] = new Arbre(null,c1);
+		System.out.println("Bon coté2");
 		if(c1>-1&&c1<11){
+			System.out.println("Bon coté3");
 			union(c1,EXTREME1);
+			System.out.println("Bon coté4");
 			if(!(c1 == 0)){
 				union(c1,c1+10);
 			}
@@ -55,6 +59,7 @@ public class ClasseUnion {
 		}else{
 			if( (c1 % 11) == 1)
 			{  
+
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
 					union(c1,c1-10);
