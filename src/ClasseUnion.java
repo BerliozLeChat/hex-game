@@ -41,7 +41,8 @@ public class ClasseUnion {
     public void unionAdjacentes(int c1){
         classes_[c1] = new Arbre(null,c1);
         //test des cases adjacentes puis si arbre présent
-
+        //si 0<=case<=10 (1ère rangée) -> union(c1,EXTREME1)
+        //si 110<=case<=120 (dernière rangée) -> union(c1,EXTREME2)
     }
 
     /**
