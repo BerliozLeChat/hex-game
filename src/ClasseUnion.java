@@ -1,30 +1,67 @@
 /**
- * Created by E115986X on 15/10/15.
+ * Structure Classe-Union
+ * @author François Hallereau & Sullivan Pineau
  */
 public class ClasseUnion {
+    /**
+     * le tableau des classes
+     */
     private Arbre[] classes_;
+
+    /**
+     * valeur fixe dans le cas où le joueur n'a pas posé de pion sur cette case
+     */
     private static Arbre NON_ATTRIBUE = null;
+
+    /**
+     * valeur de la classe qui correspond à l'une des extrémité du plateau de jeu
+     */
     private static int EXTREME1 = 121;
+
+    /**
+     * valeur de la classe qui correspond à l'autre extrémité du plateau de jeu
+     */
     private static int EXTREME2 = 122;
 
+    /**
+     * Constructeur de la structure classe union
+     */
     public ClasseUnion() {
         classes_ = new Arbre[123];
         for (int i = 0; i < 121; ++i)
-            classes_[i] = null;
-        classes_[121] = new Arbre(null,121);
-        classes_[122] = new Arbre(null,122);
+            classes_[i] = NON_ATTRIBUE;
+        classes_[EXTREME1] = new Arbre(null,EXTREME1);
+        classes_[EXTREME2] = new Arbre(null,EXTREME2);
     }
 
+    /**
+     * réalise l'ensemble des unions entre le pion qui vient d'être posé et les pions adjacents à celui-ci
+     * @param c1 le pion posé
+     */
     public void unionAdjacentes(int c1){
         classes_[c1] = new Arbre(null,c1);
         //test des cases adjacentes puis si arbre présent
 
     }
 
+    /**
+     * union entre deux pions
+     * @param c1 pion 1
+     * @param c2 pion 2
+     */
     public void union(int c1, int c2) {
-
+        c1 = classe(c1);
+        c2 = classe(c2);
+        if(c1 != c2){
+            classes_[c1].setPere(classes_[c2]);
+        }
     }
 
+    /**
+     * retourne la classe d'un pion
+     * @param c le pion
+     * @return la classe de ce pion
+     */
     public int classe(int c){
         Arbre ac = classes_[c];
         while(ac.getPere_!=null) {
