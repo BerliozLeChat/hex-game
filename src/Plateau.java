@@ -15,7 +15,7 @@ public class Plateau {
         }
     }
 
-    public Case[][] getPlateau_() {
+    public boolean[][] getPlateau_() {
         return plateau_;
     }
 
@@ -24,9 +24,13 @@ public class Plateau {
     }
 
     public void setDispo(int i, int j, boolean inverse){
-        if(inverse)
-            plateau_[j][i] = false;
-        else
             plateau_[i][j] = false;
     }
+	
+	public void afficher(){
+		for(int i =0; i<11;++i)
+		{
+			System.out.println("|"+ plateau_[i][0]+"|"+plateau_[i][1]+"|"+plateau_[i][2]+"|"+plateau_[i][3]+"|"+plateau_[i][4]+"|"+plateau_[i][5]+"|"+plateau_[i][6]+"|"+plateau_[i][7]+"|"+plateau_[i][8]+"|"+plateau_[i][9]+"|"+plateau_[i][10]+"|");
+		}	
+	}
 }

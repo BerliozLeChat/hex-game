@@ -39,76 +39,73 @@ public class ClasseUnion {
      * @param c1 le pion posé
      */
     public void unionAdjacentes(int c1){
-			classes_[c1] = new Arbre(null,c1);
+		System.out.println("Bon coté1");
+		classes_[c1] = new Arbre(null,c1);
+		System.out.println("Bon coté2");
 		if(c1>-1&&c1<11){
+			System.out.println("Bon coté3");
 			union(c1,EXTREME1);
+			System.out.println("Bon coté4");
+			if(!(c1 == 0)){
+				union(c1,c1+10);
+			}
+			union(c1,c1+11);		
 		}else if (c1>109&&c1<121){
 			union(c1,EXTREME2);
+			if(!(c1 == 120)){
+				union(c1,c1-10);
+			}
+			union(c1,c1-11);		
 		}else{
-			if( c1 mod 10 == 1)
+			if( (c1 % 11) == 1)
 			{  
-				if(classes_[c1+10]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1+10]);
-				}
+
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1-10]);
-				}
-				if(classes_[c1-9]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1-9]);
+					union(c1,c1-10);
 				}
 				if(classes_[c1+1]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1+1]);
+					union(c1,c1+1);
 				}
 				
-			}else if( c1 mod 10 ==0 )
+			}else if( (c1 % 11) ==0 )
 			{
-				if(classes_[c1-10]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1-10]);
-				}
 				if(classes_[c1-1]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1-1]);
-				}
-				if(classes_[c1+9]!=NON_ATTRIBUE)
-				{
-					union(c1,classes_[c1+9]);
+					union(c1,c1-1);
 				}
 				if(classes_[c1+10]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1+10]);
+					union(c1,c1+10);
 				}
 			}else
 			{
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
-					union(c1,classes_[c1-10]);
-				}
-				if(classes_[c1-9]!=NON_ATTRIBUE)
-				{
-					union(c1,class_[c1-9]);
+					union(c1,c1-10);
 				}
 				if(classes_[c1-1]!=NON_ATTRIBUE)
 				{
-					union(c1,class_[c1-1]);
+					union(c1,c1-1);
 				}
 				if(classes_[c1+1]!=NON_ATTRIBUE)
 				{
-					union(c1,class_[c1+1]);
-				}
-				if(classes_[c1+9]!=NON_ATTRIBUE)
-				{
-					union(c1,class_[c1+9]);
+					union(c1,c1+1);
 				}
 				if(classes_[c1+10]!=NON_ATTRIBUE)
 				{
-					union(c1,class_[c1+10]);
-				}	
+					union(c1,c1+10);
+				}
 			}
+			if(classes_[c1-11]!=NON_ATTRIBUE)
+			{
+				union(c1,c1-11);
+			}
+			if(classes_[c1+11]!=NON_ATTRIBUE)
+			{
+				union(c1,c1+11);
+			}	
 		}	
     }
 
@@ -121,7 +118,7 @@ public class ClasseUnion {
         c1 = classe(c1);
         c2 = classe(c2);
         if(c1 != c2){
-            classes_[c1].setPere(classes_[c2]);
+            classes_[c1].setPere_(classes_[c2]);
         }
     }
 
@@ -132,9 +129,9 @@ public class ClasseUnion {
      */
     public int classe(int c){
         Arbre ac = classes_[c];
-        while(ac.getPere_!=null) {
-            ac = ac.getPere_;
+        while(ac.getPere_()!=null) {
+            ac = ac.getPere_();
         }
-        return ac.getElt_;
+        return ac.getElt_();
     }
 }
