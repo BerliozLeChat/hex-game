@@ -45,21 +45,34 @@ public class ClasseUnion {
 		if(c1>-1&&c1<11){
 			System.out.println("Bon coté3");
 			union(c1,EXTREME1);
-			System.out.println("Bon coté4");
+			System.out.println("Bon coté");
 			if(!(c1 == 0)){
-				union(c1,c1+10);
+				if(classes_[c1+10]!=NON_ATTRIBUE)
+				{
+					union(c1,c1+10);
+				}
 			}
-			union(c1,c1+11);		
+			if(classes_[c1+11]!=NON_ATTRIBUE)
+			{
+					union(c1,c1+11);
+			}	
+			System.out.println("sors ?");		
 		}else if (c1>109&&c1<121){
 			union(c1,EXTREME2);
 			if(!(c1 == 120)){
-				union(c1,c1-10);
+				if(classes_[c1-10]!=NON_ATTRIBUE)
+				{
+					union(c1,c1-10);
+				}				
 			}
-			union(c1,c1-11);		
+			if(classes_[c1-11]!=NON_ATTRIBUE)
+			{
+					union(c1,c1-11);
+			}	
 		}else{
-			if( (c1 % 11) == 1)
+			if( (c1 % 11) == 0)
 			{  
-
+				
 				if(classes_[c1-10]!=NON_ATTRIBUE)
 				{
 					union(c1,c1-10);
@@ -69,7 +82,7 @@ public class ClasseUnion {
 					union(c1,c1+1);
 				}
 				
-			}else if( (c1 % 11) ==0 )
+			}else if( (c1 % 11) ==10 )
 			{
 				if(classes_[c1-1]!=NON_ATTRIBUE)
 				{
