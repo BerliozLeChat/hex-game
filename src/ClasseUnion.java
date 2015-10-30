@@ -39,10 +39,77 @@ public class ClasseUnion {
      * @param c1 le pion posé
      */
     public void unionAdjacentes(int c1){
-        classes_[c1] = new Arbre(null,c1);
-        //test des cases adjacentes puis si arbre présent
-        //si 0<=case<=10 (1ère rangée) -> union(c1,EXTREME1)
-        //si 110<=case<=120 (dernière rangée) -> union(c1,EXTREME2)
+			classes_[c1] = new Arbre(null,c1);
+		if(c1>-1&&c1<11){
+			union(c1,EXTREME1);
+		}else if (c1>109&&c1<121){
+			union(c1,EXTREME2);
+		}else{
+			if( c1 mod 10 == 1)
+			{  
+				if(classes_[c1+10]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1+10]);
+				}
+				if(classes_[c1-10]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1-10]);
+				}
+				if(classes_[c1-9]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1-9]);
+				}
+				if(classes_[c1+1]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1+1]);
+				}
+				
+			}else if( c1 mod 10 ==0 )
+			{
+				if(classes_[c1-10]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1-10]);
+				}
+				if(classes_[c1-1]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1-1]);
+				}
+				if(classes_[c1+9]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1+9]);
+				}
+				if(classes_[c1+10]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1+10]);
+				}
+			}else
+			{
+				if(classes_[c1-10]!=NON_ATTRIBUE)
+				{
+					union(c1,classes_[c1-10]);
+				}
+				if(classes_[c1-9]!=NON_ATTRIBUE)
+				{
+					union(c1,class_[c1-9]);
+				}
+				if(classes_[c1-1]!=NON_ATTRIBUE)
+				{
+					union(c1,class_[c1-1]);
+				}
+				if(classes_[c1+1]!=NON_ATTRIBUE)
+				{
+					union(c1,class_[c1+1]);
+				}
+				if(classes_[c1+9]!=NON_ATTRIBUE)
+				{
+					union(c1,class_[c1+9]);
+				}
+				if(classes_[c1+10]!=NON_ATTRIBUE)
+				{
+					union(c1,class_[c1+10]);
+				}	
+			}
+		}	
     }
 
     /**
