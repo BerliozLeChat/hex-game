@@ -1,6 +1,8 @@
 /**
  * Created by E115986X on 12/10/15.
  */
+
+@Deprecated
 public class Case {
 
     private int i_; // la ligne
