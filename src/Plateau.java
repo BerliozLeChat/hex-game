@@ -3,28 +3,28 @@
  */
 public class Plateau {
 
-    private boolean[][] plateau_;
+    private char[][] plateau_;
 
     public Plateau(){
-        plateau_ = new boolean[11][11];
+        plateau_ = new char[11][11];
         for(int i = 0;i<11;++i){
             for(int j= 0;j<11;++j){
-                plateau_[i][j] = true;
+                plateau_[i][j] = 'o';
                 //Classe(Case)
             }
         }
     }
 
-    public boolean[][] getPlateau_() {
+    public char[][] getPlateau_() {
         return plateau_;
     }
 
-    public boolean estDispo(int i, int j, boolean inverse){
-        return (inverse ? plateau_[j][i] : plateau_[i][j]);
+    public char estDispo(int i, int j){
+        return plateau_[i][j];
     }
 
-    public void setDispo(int i, int j, boolean inverse){
-            plateau_[i][j] = false;
+    public void setDispo(int i, int j, char nom){
+            plateau_[i][j] = nom;
     }
 	
 	public void afficher(){
