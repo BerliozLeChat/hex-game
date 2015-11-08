@@ -1,3 +1,5 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * Structure Classe-Union
  * @author François Hallereau & Sullivan Pineau
@@ -23,6 +25,8 @@ public class ClasseUnion {
      */
     private static int EXTREME2 = 122;
 
+    private final static Logger LOGGER = Logger.getLogger(ClasseUnion.class.getName());
+
     /**
      * Constructeur de la structure classe union
      */
@@ -39,13 +43,13 @@ public class ClasseUnion {
      * @param c1 le pion posé
      */
     public void unionAdjacentes(int c1){
-		System.out.println("Bon coté1");
+		LOGGER.info("Bon coté1");
 		classes_[c1] = new Arbre(null,c1);
-		System.out.println("Bon coté2");
+		LOGGER.info("Bon coté2");
 		if(c1>-1&&c1<11){
-			System.out.println("Bon coté3");
+			LOGGER.info("Bon coté3");
 			union(c1,EXTREME1);
-			System.out.println("Bon coté");
+			LOGGER.info("Bon coté");
 			if(!(c1 == 0)){
 				if(classes_[c1+10]!=NON_ATTRIBUE)
 				{
@@ -56,7 +60,7 @@ public class ClasseUnion {
 			{
 					union(c1,c1+11);
 			}	
-			System.out.println("sors ?");		
+			LOGGER.info("sors ?");		
 		}else if (c1>109&&c1<121){
 			union(c1,EXTREME2);
 			if(!(c1 == 120)){

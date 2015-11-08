@@ -7,16 +7,16 @@ public class Main {
         Joueur joueurb = new Joueur(1, "François");
 		while( joueura.fini()!=true && joueurb.fini()!=true)
 		{
-			System.out.println(joueura.getNom_()+", c'est a vous de jouer, veuillez donner une coordonnée x et y ");
+			System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
 			int x,y;
 			Scanner saisieUtilisateur = new Scanner(System.in); 
- 			x = saisieUtilisateur.nextInt(); 
-			y = saisieUtilisateur.nextInt();
-			while(!( plateau.estDispo(x,y)=='o'))
+ 			x = saisie(saisieUtilisateur);
+			y = saisie(saisieUtilisateur);
+			while( !verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
 			{
-				System.out.println("La casse n'est pas disponible veuillez redonner des coordonés !!!"); 
- 				x = saisieUtilisateur.nextInt(); 
-				y = saisieUtilisateur.nextInt();
+				System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+ 				x = saisie(saisieUtilisateur);
+				y = saisie(saisieUtilisateur);
 			}
 			int z= x*11 + y;
 			joueura.jouer(z);
@@ -24,14 +24,14 @@ public class Main {
 			plateau.afficher();
 			if( joueura.fini()!=true )
 			{
-				System.out.println(joueurb.getNom_()+", c'est a vous de jouer, veuillez donner une coordonnée x et y ");
-				x = saisieUtilisateur.nextInt(); 
-				y = saisieUtilisateur.nextInt();
+				System.out.println(joueurb.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
+				x = saisie(saisieUtilisateur);
+				y = saisie(saisieUtilisateur);
 				while(!( plateau.estDispo(x,y)=='o' ))
 				{
-					System.out.println("La casse n'est pas disponible veuillez redonner des coordonés !!!"); 
-					x = saisieUtilisateur.nextInt(); 
-					y = saisieUtilisateur.nextInt();
+					System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+					x = saisie(saisieUtilisateur);
+					y = saisie(saisieUtilisateur);
 				}
 				z= x + y*11;
 				joueurb.jouer(z);
@@ -45,5 +45,19 @@ public class Main {
 		}else{
 			System.out.println(joueurb.getNom_()+" a gagné !! ");
 		}
+    }
+
+    public static boolean verificationCoordonnees(int x,int y){
+        return x>=-1&&x<11 && y>=-1&&y<11?true:false;
+    }
+
+    public static int saisie(Scanner scan){
+        int a;
+            while(!scan.hasNextInt()){
+                System.out.println("Un entier est attendu");
+                scan.next();
+            }
+            a = scan.nextInt();
+        return a;
     }
 }
