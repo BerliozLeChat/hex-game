@@ -151,4 +151,21 @@ public class ClasseUnion {
         }
         return ac.getElt_();
     }
+
+    /**
+     * teste s’il y a un chemin entre les deux extrémités du plateau de jeu
+     * @return vrai si un chemin existe sinon faux
+     */
+    public boolean existeCheminCotes(){
+        return classe(EXTREME1)==classe(EXTREME2);
+    }
+
+    public boolean existeCheminCases(int c1,int c2){
+        boolean existe = false;
+        if(classes_[c1] != NON_ATTRIBUE && classes_[c2] != NON_ATTRIBUE){
+            if(classe(c1) == classe(c2))
+                existe = true;
+        }
+        return existe;
+    }
 }

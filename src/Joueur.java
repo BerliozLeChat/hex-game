@@ -27,14 +27,15 @@ public class Joueur {
         return fini_;
     }
 
-	public void jouer(int c1)
-	{
-		System.out.println(c1);
-
+	public void ajoutePion(int c1){
 		ClasseUnion_.unionAdjacentes(c1);
-		if ( ClasseUnion_.classe(121)==ClasseUnion_.classe(122))
-		{
-			fini_= true;
-		}
 	}
+
+    public void existeCheminCotes(){
+        fini_ = ClasseUnion_.existeCheminCotes();
+    }
+
+    public boolean existeCheminCase(int c1,int c2){
+        return ClasseUnion_.existeCheminCases(c1,c2);
+    }
 }
