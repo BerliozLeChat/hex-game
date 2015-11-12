@@ -182,19 +182,19 @@ public class ClasseUnion {
             }
             if(classes_[c1+11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+11))))
             {
-                classesAdjacentes.add(classe(c1+11));
+                classesAdjacentes.add(classe(c1 + 11));
             }
         }else if (c1>109&&c1<121){//c1 est sur la dernière ligne
             classesAdjacentes.add(classe(EXTREME2));
             if(!(c1 == 120)){//c1 est la première case
                 if(classes_[c1-10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-10))))
                 {
-                    classesAdjacentes.add(classe(c1-10));
+                    classesAdjacentes.add(classe(c1 - 10));
                 }
             }
             if(classes_[c1-11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-11))))
             {
-                classesAdjacentes.add(classe(c1-11));
+                classesAdjacentes.add(classe(c1 - 11));
             }
         }else{//sinon
             if( (c1 % 11) == 0)//1ere colonne
@@ -202,52 +202,66 @@ public class ClasseUnion {
 
                 if(classes_[c1-10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-10))))
                 {
-                    classesAdjacentes.add(classe(c1-10));
+                    classesAdjacentes.add(classe(c1 - 10));
                 }
                 if(classes_[c1+1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+1))))
                 {
-                    classesAdjacentes.add(classe(c1+1));
+                    classesAdjacentes.add(classe(c1 + 1));
                 }
 
             }else if( (c1 % 11) ==10 )//dernière colonne
             {
                 if(classes_[c1-1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-1))))
                 {
-                    classesAdjacentes.add(classe(c1-1));
+                    classesAdjacentes.add(classe(c1 - 1));
                 }
                 if(classes_[c1+10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+10))))
                 {
-                    classesAdjacentes.add(classe(c1+10));
+                    classesAdjacentes.add(classe(c1 + 10));
                 }
             }else
             {
                 if(classes_[c1-10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-10))))
                 {
-                    classesAdjacentes.add(classe(c1-10));
+                    classesAdjacentes.add(classe(c1 - 10));
                 }
                 if(classes_[c1-1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-1))))
                 {
-                    classesAdjacentes.add(classe(c1-1));
+                    classesAdjacentes.add(classe(c1 - 1));
                 }
                 if(classes_[c1+1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+1))))
                 {
-                    classesAdjacentes.add(classe(c1+1));
+                    classesAdjacentes.add(classe(c1 + 1));
                 }
                 if(classes_[c1+10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+10))))
                 {
-                    classesAdjacentes.add(classe(c1+10));
+                    classesAdjacentes.add(classe(c1 + 10));
                 }
             }
             if(classes_[c1-11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-11))))
             {
-                classesAdjacentes.add(classe(c1-11));
+                classesAdjacentes.add(classe(c1 - 11));
             }
             if(classes_[c1+11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+11))))
             {
-                classesAdjacentes.add(classe(c1+11));
+                classesAdjacentes.add(classe(c1 + 11));
             }
         }
 
         return classesAdjacentes;
+    }
+
+    public String afficheComposante(int x){
+        int c = classe(x);
+
+        StringBuilder str = new StringBuilder("Liste de la composante du pion "+Integer.toString(x)+" :");
+        for(int i = 0; i<123;++i){
+            if(i!=x && classe(i) == c) {
+                str.append(Integer.toString(i));
+                str.append(", ");
+            }
+        }
+
+        return str.toString();
     }
 }
