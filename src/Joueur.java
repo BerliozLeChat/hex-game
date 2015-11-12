@@ -11,8 +11,7 @@ public class Joueur {
         type_ = type;
         nom_ = nom;
 		fini_ = false;
-		ClasseUnion ClasseUnionbis = new ClasseUnion();
-		ClasseUnion_ = ClasseUnionbis;
+		ClasseUnion_ = new ClasseUnion();
     }
 
     public int getType_() {

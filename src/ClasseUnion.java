@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -167,5 +168,86 @@ public class ClasseUnion {
                 existe = true;
         }
         return existe;
+    }
+
+    public ArrayList<Integer> relieComposantes(int c1){
+        ArrayList<Integer> classesAdjacentes = new ArrayList<Integer>();
+        if(c1>-1&&c1<11){// c1  est sur la première ligne
+            classesAdjacentes.add(classe(EXTREME1));
+            if(!(c1 == 0)){//c1 n'est pas la première case
+                if(classes_[c1+10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+10))))
+                {
+                    classesAdjacentes.add(classe(c1+10));
+                }
+            }
+            if(classes_[c1+11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+11))))
+            {
+                classesAdjacentes.add(classe(c1+11));
+            }
+        }else if (c1>109&&c1<121){//c1 est sur la dernière ligne
+            classesAdjacentes.add(classe(EXTREME2));
+            if(!(c1 == 120)){//c1 est la première case
+                if(classes_[c1-10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-10))))
+                {
+                    classesAdjacentes.add(classe(c1-10));
+                }
+            }
+            if(classes_[c1-11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-11))))
+            {
+                classesAdjacentes.add(classe(c1-11));
+            }
+        }else{//sinon
+            if( (c1 % 11) == 0)//1ere colonne
+            {
+
+                if(classes_[c1-10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-10))))
+                {
+                    classesAdjacentes.add(classe(c1-10));
+                }
+                if(classes_[c1+1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+1))))
+                {
+                    classesAdjacentes.add(classe(c1+1));
+                }
+
+            }else if( (c1 % 11) ==10 )//dernière colonne
+            {
+                if(classes_[c1-1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-1))))
+                {
+                    classesAdjacentes.add(classe(c1-1));
+                }
+                if(classes_[c1+10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+10))))
+                {
+                    classesAdjacentes.add(classe(c1+10));
+                }
+            }else
+            {
+                if(classes_[c1-10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-10))))
+                {
+                    classesAdjacentes.add(classe(c1-10));
+                }
+                if(classes_[c1-1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-1))))
+                {
+                    classesAdjacentes.add(classe(c1-1));
+                }
+                if(classes_[c1+1]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+1))))
+                {
+                    classesAdjacentes.add(classe(c1+1));
+                }
+                if(classes_[c1+10]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+10))))
+                {
+                    classesAdjacentes.add(classe(c1+10));
+                }
+            }
+            if(classes_[c1-11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1-11))))
+            {
+                classesAdjacentes.add(classe(c1-11));
+            }
+            if(classes_[c1+11]!=NON_ATTRIBUE && !(classesAdjacentes.contains(classe(c1+11))))
+            {
+                classesAdjacentes.add(classe(c1+11));
+            }
+        }
+
+        return classesAdjacentes;
     }
 }
