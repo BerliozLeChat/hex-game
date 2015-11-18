@@ -48,7 +48,7 @@ public class Main {
                 System.out.println(joueurb.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
                 x = saisie(saisieUtilisateur);
                 y = saisie(saisieUtilisateur);
-                while(!( plateau.estDispo(x,y)=='o' ))
+                while(!verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
                 {
                     System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
                     x = saisie(saisieUtilisateur);
