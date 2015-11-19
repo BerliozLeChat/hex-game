@@ -19,12 +19,19 @@ public class Main {
         joueura.ajoutePion(z);
         plateau.setDispo(1,5,'A');
 
+        z= 4*11 + 5;
+        joueura.ajoutePion(z);
+        plateau.setDispo(4,5,'A');
+
+        System.out.println(plateau.calculDistance(1,5,4,5,'A',joueura));
 
         plateau.afficher();
         ArrayList<Integer> list = joueura.getClasseUnion().afficheComposante(5);
-        for(Integer i : list)
-            System.out.println(Integer.toString(i));
+        /*for(Integer i : list)
+            System.out.println(Integer.toString(i));*/
 
+        for(int i : plateau.voisin(1,1))
+            System.out.println(Integer.toString(i));
         //joueDeuxHumains(joueura,joueurb,plateau);
 
     }
