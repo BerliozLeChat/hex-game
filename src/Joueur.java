@@ -37,4 +37,8 @@ public class Joueur {
     public boolean existeCheminCase(int c1,int c2){
         return ClasseUnion_.existeCheminCases(c1,c2);
     }
+
+    public ClasseUnion getClasseUnion(){
+        return ClasseUnion_;
+    }
 }

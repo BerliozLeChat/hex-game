@@ -1,4 +1,5 @@
-import java.util.Scanner; 
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String [] args) {
@@ -6,7 +7,25 @@ public class Main {
         Joueur joueura = new Joueur(0, "Sullivan");
         Joueur joueurb = new Joueur(1, "François");
 
-        joueDeuxHumains(joueura,joueurb,plateau);
+        int z= 0*11 + 5;
+        joueura.ajoutePion(z);
+        plateau.setDispo(0,5,'A');
+
+        z= 0*11 + 6;
+        joueura.ajoutePion(z);
+        plateau.setDispo(0,6,'A');
+
+        z= 1*11 + 5;
+        joueura.ajoutePion(z);
+        plateau.setDispo(1,5,'A');
+
+
+        plateau.afficher();
+        ArrayList<Integer> list = joueura.getClasseUnion().afficheComposante(5);
+        for(Integer i : list)
+            System.out.println(Integer.toString(i));
+
+        //joueDeuxHumains(joueura,joueurb,plateau);
 
     }
 

@@ -36,7 +36,7 @@ public class Plateau {
 	}
 
     //calculDistance dans plateau car il est nécessaire d'avoir la vision d'ensemble de celui ci. cad on a besoin de savoir a qui appartiennent les cases.
-    public void calculDistance(int x1, int y1,int x2,int y2, char nom){
+    public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
         /*
           f = CreerFile();
           f.enfiler(s);
@@ -53,14 +53,27 @@ public class Plateau {
           FIN TANT QUE
         */
         boolean[] marqueur = new boolean[123];
+        ArrayList<Integer> composante = j.getClasseUnion().afficheComposante(coordToCase(x2,y2));//à vérifier dans le cas ou les coordonnés sont inversé
+        boolean trouve = false;
+        int pion = 0;
         for(int i = 0;i<123;++i)
             marqueur[i]=false;
         LinkedList<Integer> file = new LinkedList<Integer>();
         file.add(coordToCase(x1,y1));
-        marqueur
-
-
-
+        marqueur[coordToCase(x1,y1)] = true;
+        while( !file.isEmpty() && trouve == false){
+            int s = file.poll();
+            for(int v : voisin(s % 11,s/11)){//pour tout les voisins d'une case
+                if(marqueur[v]==false){//il n'a pas déjà été visité
+                    file.add(v);
+                    marqueur[v] = true;
+                    if(composante.contains(v))//on vérifie qu'il appartient à la composante d'arrivée
+                        trouve=true;//c'est le cas donc on a trouvé le plus court chemin
+                }
+            }
+            pion++;
+        }
+        return pion;
     }
 
     public ArrayList<Integer> voisin(int x, int y){

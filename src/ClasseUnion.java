@@ -145,12 +145,17 @@ public class ClasseUnion {
      * @param c le pion
      * @return la classe de ce pion
      */
-    public int classe(int c){
+    public Integer classe(int c){
         Arbre ac = classes_[c];
-        while(ac.getPere_()!=null) {
-            ac = ac.getPere_();
+        if(ac!=null){
+            while(ac.getPere_()!=null) {
+                ac = ac.getPere_();
+            }
+            return ac.getElt_();
         }
-        return ac.getElt_();
+        else{
+            return null;
+        }
     }
 
     /**
@@ -251,17 +256,15 @@ public class ClasseUnion {
         return classesAdjacentes;
     }
 
-    public String afficheComposante(int x){
-        int c = classe(x);
-
-        StringBuilder str = new StringBuilder("Liste de la composante du pion "+Integer.toString(x)+" :");
+    public ArrayList<Integer> afficheComposante(int x){
+        Integer c = classe(x);
+        ArrayList<Integer> composante = new ArrayList<Integer>();
         for(int i = 0; i<123;++i){
             if(i!=x && classe(i) == c) {
-                str.append(Integer.toString(i));
-                str.append(", ");
+                composante.add(i);
             }
         }
 
-        return str.toString();
+        return composante;
     }
 }
