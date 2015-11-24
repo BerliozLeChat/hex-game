@@ -6,16 +6,22 @@ public class Joueur {
     private String nom_;
     private ClasseUnion ClasseUnion_;
 	private boolean fini_;
+    private boolean direction_;
 
-    public Joueur(int type, String nom){
+    public Joueur(int type, String nom, boolean direction){
         type_ = type;
         nom_ = nom;
+        direction_=direction; // true vertical 
 		fini_ = false;
 		ClasseUnion_ = new ClasseUnion();
     }
 
     public int getType_() {
         return type_;
+    }
+
+    public boolean getdirection(){
+        return direction_;
     }
 
     public String getNom_() {
