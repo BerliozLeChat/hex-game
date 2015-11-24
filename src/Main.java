@@ -7,31 +7,38 @@ public class Main {
         Joueur joueura = new Joueur(0, "Sullivan");
         Joueur joueurb = new Joueur(1, "François");
 
-        int z= 0*11 + 5;
+        int z;/*= 4*11 + 5;
         joueura.ajoutePion(z);
-        plateau.setDispo(0,5,'A');
+        plateau.setDispo(4,5,'A');*/
 
-        z= 0*11 + 6;
+        /*z= 3*11 + 6;
         joueura.ajoutePion(z);
-        plateau.setDispo(0,6,'A');
+        plateau.setDispo(3,5,'A');*/
 
-        z= 1*11 + 5;
+        z= 0*11 + 0 ;
         joueura.ajoutePion(z);
-        plateau.setDispo(1,5,'A');
+        plateau.setDispo(0,0,'A');
 
-        z= 4*11 + 5;
+        z= 0*11 + 10 ;
         joueura.ajoutePion(z);
-        plateau.setDispo(4,5,'A');
+        plateau.setDispo(0,10,'A');
 
-        System.out.println(plateau.calculDistance(1,5,4,5,'A',joueura));
+        z= 10*11 + 10;
+        joueura.ajoutePion(z);
+        plateau.setDispo(10,10,'A');
+
+
 
         plateau.afficher();
-        ArrayList<Integer> list = joueura.getClasseUnion().afficheComposante(5);
+        for(int i : plateau.voisin(4,5))
+            System.out.println(Integer.toString(i));
+        System.out.println(plateau.calculDistance(0,0,0,10,'A',joueura));
+
+        //ArrayList<Integer> list = joueura.getClasseUnion().afficheComposante(5);
         /*for(Integer i : list)
             System.out.println(Integer.toString(i));*/
 
-        for(int i : plateau.voisin(1,1))
-            System.out.println(Integer.toString(i));
+
         //joueDeuxHumains(joueura,joueurb,plateau);
 
     }

@@ -27,49 +27,77 @@ public class Plateau {
     public void setDispo(int i, int j, char nom){
             plateau_[i][j] = nom;
     }
-	
 	public void afficher(){
-		for(int i =0; i<11;++i)
+        int w;
+        int j;
+        StringBuilder build = new StringBuilder();
+        for(int i =0; i<11;++i)
 		{
-			System.out.println("|"+ plateau_[i][0]+"|"+plateau_[i][1]+"|"+plateau_[i][2]+"|"+plateau_[i][3]+"|"+plateau_[i][4]+"|"+plateau_[i][5]+"|"+plateau_[i][6]+"|"+plateau_[i][7]+"|"+plateau_[i][8]+"|"+plateau_[i][9]+"|"+plateau_[i][10]+"|");
-		}	
+            for(w=0;w<i;++w)
+                build.append(" ");
+            build.append("|");
+            for(j=0;j<11;++j) {
+                build.append(plateau_[i][j]);
+                build.append("|");
+
+            }
+            build.append("\n");
+        }
+        System.out.println(build.toString());
 	}
 
     //calculDistance dans plateau car il est nécessaire d'avoir la vision d'ensemble de celui ci. cad on a besoin de savoir a qui appartiennent les cases.
-   /* public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
+    public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
         boolean[] marqueur = new boolean[123];
-        ArrayList<Integer> composante = j.getClasseUnion().afficheComposante(coordToCase(x2,y2));//à vérifier dans le cas ou les coordonnés sont inversé
         boolean trouve = false;
         int pion = 0;
         for(int i = 0;i<123;++i)
             marqueur[i]=false;
-        LinkedList<Integer> file = new LinkedList<Integer>();
-        file.add(coordToCase(x1,y1));
+        LinkedList<Integer> fileEnCours = new LinkedList<Integer>();
+        LinkedList<Integer> fileAvenir = new LinkedList<Integer>();
+        fileEnCours.add(coordToCase(x1,y1));
         marqueur[coordToCase(x1,y1)] = true;
-        while( !file.isEmpty() && !trouve){
-            int s = file.poll();
-            for(int v : voisin(s % 11,s/11)){//pour tout les voisins d'une case
-                if(!marqueur[v] && plateau_[v%11][v/11]=='o' && plateau_[v%11][v/11]==nom){//il n'a pas déjà été visité
-                    file.add(v);
-                    marqueur[v] = true;
-                    if(composante.contains(v))//on vérifie qu'il appartient à la composante d'arrivée
-                        trouve=true;//c'est le cas donc on a trouvé le plus court chemin
+       do{
+            while(!fileEnCours.isEmpty()&&!trouve)
+            {
+                int s = fileEnCours.poll();
+                for(int v : voisin(s % 11,s/11)){//pour tout les voisins d'une case
+                    if(!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]==nom)){//il n'a pas déjà été visité
+                        if(plateau_[v%11][v/11]==nom)
+                        {
+                            fileEnCours.add(v);
+                        }else
+                        {
+                            fileAvenir.add(v);
+                        }
+                        marqueur[v] = true;
+
+                        if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
+                        {
+                            trouve = true;//c'est le cas donc on a trouvé le plus court chemin
+                        }
+                    }
                 }
             }
-            pion++;
-        }
-        return pion;
-    }*/
-    public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
+           if(!trouve) {
+                fileEnCours.addAll(fileAvenir);
+                fileAvenir.clear();
+                pion++;
+            }
+       } while( !fileEnCours.isEmpty() && !trouve);
+        return pion-1;
+    }
+
+    public int calculDistance2(int x1, int y1,int x2,int y2, char nom, Joueur j){
         ArrayList<Integer> list= new ArrayList<Integer>();
         list.add(coordToCase(x1,y1));
         int coor = x2*11+y2;
         int min=126;
-        calculDistanceR(list, coor, 0, min, nom, j);
+        calculDistanceR2(list, coor, 0, min, nom, j);
         return min;
     }
 
-    private void calculDistanceR(ArrayList<Integer> list ,int coor ,int i, int min,char nom, Joueur j) {
+    private void calculDistanceR2(ArrayList<Integer> list ,int coor ,int i, int min,char nom, Joueur j) {
         if (i < min) {
             ArrayList<Integer> listvoisin = new ArrayList<Integer>();
             if (list.contains(coor)) {
@@ -81,9 +109,9 @@ public class Plateau {
                 for (int q : list) {
                     for (int v : voisin(q % 11, q / 11)) {
                         if (plateau_[v / 11][v % 11] == nom) {
-                            calculDistanceR(voisin(v / 11, v % 11), coor, i, min, nom, j);
+                            calculDistanceR2(voisin(v / 11, v % 11), coor, i, min, nom, j);
                         } else {
-                            calculDistanceR(voisin(v / 11, v % 11), coor, i + 1, min, nom, j);
+                            calculDistanceR2(voisin(v / 11, v % 11), coor, i + 1, min, nom, j);
                         }
                     }
                 }
@@ -120,7 +148,6 @@ public class Plateau {
             nouvellecoor = (x+1) * 11 + y;
             v.add(nouvellecoor);
         }
-        System.out.println("la longueur de v est :"+v.size());
         return v;
     }
 

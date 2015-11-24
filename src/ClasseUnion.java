@@ -44,13 +44,9 @@ public class ClasseUnion {
      * @param c1 le pion posé
      */
     public void unionAdjacentes(int c1){
-		LOGGER.info("Bon coté1");
 		classes_[c1] = new Arbre(null,c1);
-		LOGGER.info("Bon coté2");
 		if(c1>-1&&c1<11){
-			LOGGER.info("Bon coté3");
 			union(c1,EXTREME1);
-			LOGGER.info("Bon coté");
 			if(!(c1 == 0)){
 				if(classes_[c1+10]!=NON_ATTRIBUE)
 				{
@@ -60,8 +56,7 @@ public class ClasseUnion {
 			if(classes_[c1+11]!=NON_ATTRIBUE)
 			{
 					union(c1,c1+11);
-			}	
-			LOGGER.info("sors ?");		
+			}
 		}else if (c1>109&&c1<121){
 			union(c1,EXTREME2);
 			if(!(c1 == 120)){
