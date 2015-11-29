@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+import fr.algo.hexgame.Joueur;
+import fr.algo.hexgame.Plateau;
+
 import java.util.Scanner;
 
 public class Main {
