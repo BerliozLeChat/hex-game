@@ -162,6 +162,12 @@ public class ClasseUnion {
         return classe(EXTREME1)==classe(EXTREME2);
     }
 
+    /**
+     * teste si il existe un chemin entre 2 cases
+     * @param c1 une case
+     * @param c2 l'autre case
+     * @return vrai si il y a un chemin, faux sinon
+     */
     public boolean existeCheminCases(int c1,int c2){
         boolean existe = false;
         if(classes_[c1] != NON_ATTRIBUE && classes_[c2] != NON_ATTRIBUE){
@@ -171,6 +177,11 @@ public class ClasseUnion {
         return existe;
     }
 
+    /**
+     * retourne la liste des éléments qu'un pion relie quand il est posé sur le plateau
+     * @param c1 le pion
+     * @return la liste des éléments
+     */
     public ArrayList<Integer> relieComposantes(int c1){
         ArrayList<Integer> classesAdjacentes = new ArrayList<Integer>();
         if(c1>-1&&c1<11){// c1  est sur la première ligne
@@ -252,6 +263,11 @@ public class ClasseUnion {
         return classesAdjacentes;
     }
 
+    /**
+     * Méthode qui affiche tous les éléments d'une composante
+     * @param x le pion
+     * @return le tableau d'éléments
+     */
     public ArrayList<Integer> afficheComposante(int x){
         Integer c = classe(x);
         ArrayList<Integer> composante = new ArrayList<Integer>();
