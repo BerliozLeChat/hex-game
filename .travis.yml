@@ -1,4 +1,2 @@
 language: java
-script : 
-	make all
-	javac src/Main.java -d bin/ -cp bin/
+script : make all
