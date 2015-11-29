@@ -1,8 +1,8 @@
 package hexgame;
 
 /**
- * Classe hexgame.Arbre.
- * Représente la structure d'un arbre
+ * Classe Arbre.
+ * Représente la structure d'un arbre.
  */
 public class Arbre {
     /**
@@ -26,24 +26,27 @@ public class Arbre {
     }
 
     /**
-     * Retourne l'attribut #pere_ de l'arbre
+     * Retourne l'attribut pere de l'arbre
      * @return le pere
+     * @see #pere_
      */
     public Arbre getPere_() {
         return pere_;
     }
 
     /**
-     * Mutateur de l'attribut #pere_
+     * Mutateur de l'attribut pere
      * @param pere le nouveau pere
+     * @see #pere_
      */
     public void setPere_(Arbre pere) {
         pere_ = pere;
     }
 
     /**
-     * Accesseur de l'attribut #elt_
+     * Accesseur de l'attribut elt
      * @return l'élément
+     * @see #elt_
      */
     public int getElt_() {
         return elt_;

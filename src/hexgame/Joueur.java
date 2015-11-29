@@ -1,7 +1,7 @@
 package hexgame;
 
 /**
- * Classe hexgame.Joueur
+ * Classe Joueur
  * @author François Hallereau & Sullivan Pineau
  */
 public class Joueur {
@@ -45,39 +45,43 @@ public class Joueur {
     }
 
     /**
-     * Accesseur de l'attribut #type_
+     * Accesseur de l'attribut type
      * @return le type
+     * @see #type_
      */
     public int getType_() {
         return type_;
     }
 
     /**
-     * Accesseur de l'attribut #direction_
+     * Accesseur de l'attribut direction
      * @return la direction
+     * @see #direction_
      */
     public boolean getdirection(){
         return direction_;
     }
 
     /**
-     * Accesseur de l'attribut #nom_
+     * Accesseur de l'attribut nom
      * @return le nom
+     * @see #nom_
      */
     public String getNom_() {
         return nom_;
     }
 
     /**
-     * Accesseur de l'attribut #fini_
+     * Accesseur de l'attribut fini
      * @return la condition de victoire
+     * @see #fini_
      */
     public boolean fini(){
         return fini_;
     }
 
     /**
-     * Méthode qui ajoute un pion dans la structure #ClasseUnion_ du joueur
+     * Méthode qui ajoute un pion dans la structure ClasseUnion du joueur
      * @param c1 le numéro de la case où est posé le pion
      */
 	public void ajoutePion(int c1){
@@ -85,7 +89,8 @@ public class Joueur {
 	}
 
     /**
-     * stocke dans l'attribut #fini_ si il existe un chemin entre les deux extrémités du plateau
+     * stocke dans l'attribut fini si il existe un chemin entre les deux extrémités du plateau
+     * @see ClasseUnion#existeCheminCotes()
      */
     public void existeCheminCotes(){
         fini_ = ClasseUnion_.existeCheminCotes();
@@ -96,14 +101,16 @@ public class Joueur {
      * @param c1 le numéro de la case
      * @param c2 le numéro de l'autre case
      * @return vrai si un chemin existe faux sinon
+     * @see ClasseUnion#existeCheminCases(int, int)
      */
     public boolean existeCheminCase(int c1,int c2){
         return ClasseUnion_.existeCheminCases(c1,c2);
     }
 
     /**
-     * Accesseur de l'attribut #ClasseUnion_
+     * Accesseur de l'attribut ClasseUnion
      * @return la classe union
+     * @see #ClasseUnion_
      */
     public ClasseUnion getClasseUnion(){
         return ClasseUnion_;

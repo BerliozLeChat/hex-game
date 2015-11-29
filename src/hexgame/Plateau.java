@@ -3,7 +3,7 @@ package hexgame;
 import java.util.*;
 
 /**
- * Classe hexgame.Plateau.
+ * Classe Plateau.
  * Défini le plateau de jeu sur lequel repose les pions
  * @author François Hallereau & Sullivan Pineau
  */
@@ -15,7 +15,7 @@ public class Plateau {
     private char[][] plateau_;
 
     /**
-     * Contructeur de la classe hexgame.Plateau
+     * Contructeur de la classe Plateau
      */
     public Plateau(){
         plateau_ = new char[11][11];
@@ -27,8 +27,9 @@ public class Plateau {
     }
 
     /**
-     * Accesseur de l'attribut #plateau_
+     * Accesseur de l'attribut plateau
      * @return le plateau
+     * @see #plateau_
      */
     public char[][] getPlateau_() {
         return plateau_;
@@ -84,7 +85,8 @@ public class Plateau {
      * @param y2 indice de la colonne du pion 2
      * @param nom le caractère représentant le joueur
      * @param j le joueur
-     * @return
+     * @return la distance entre deux pion
+     * @see Joueur
      */
     public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
         boolean[] marqueur = new boolean[123];

@@ -1,7 +1,6 @@
 package hexgame;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 /**
  * Structure Classe-Union
  * @author François Hallereau & Sullivan Pineau
@@ -27,7 +26,6 @@ public class ClasseUnion {
      */
     private static int EXTREME2 = 122;
 
-    private final static Logger LOGGER = Logger.getLogger(ClasseUnion.class.getName());
 
     /**
      * Constructeur de la structure classe union
