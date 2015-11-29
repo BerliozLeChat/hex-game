@@ -70,7 +70,7 @@ public class Joueur {
 
     /**
      * Accesseur de l'attribut #fini_
-     * @return
+     * @return la condition de victoire
      */
     public boolean fini(){
         return fini_;
