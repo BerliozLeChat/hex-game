@@ -1,6 +1,3 @@
-import fr.algo.hexgame.Joueur;
-import fr.algo.hexgame.Plateau;
-
 import java.util.Scanner;
 
 public class Main {
@@ -124,6 +121,7 @@ public class Main {
         }
         return pion;
     }
+
     public static void joueOrdiHumain(Joueur joueura, Plateau plateau){
        Joueur joueurb = new Joueur(1, "Ordinateur",false);
        plateau.afficher();

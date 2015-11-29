@@ -1,5 +1,3 @@
-package fr.algo.hexgame;
-
 import java.util.ArrayList;
 import java.util.logging.Logger;
 /**

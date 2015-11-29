@@ -1,9 +1,7 @@
-package fr.algo.hexgame;
-
 import java.util.*;
 
 /**
- * Classe fr.algo.hexgame.Plateau.
+ * Classe Plateau.
  * Défini le plateau de jeu sur lequel repose les pions
  * @author François Hallereau & Sullivan Pineau
  */
@@ -15,7 +13,7 @@ public class Plateau {
     private char[][] plateau_;
 
     /**
-     * Contructeur de la classe fr.algo.hexgame.Plateau
+     * Contructeur de la classe Plateau
      */
     public Plateau(){
         plateau_ = new char[11][11];
