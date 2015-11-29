@@ -1,22 +1,12 @@
-package fr.algo.hexgame;
-
 import java.util.*;
 
 /**
- * Classe fr.algo.hexgame.Plateau.
- * Défini le plateau de jeu sur lequel repose les pions
- * @author François Hallereau & Sullivan Pineau
+ * Created by E115986X on 12/10/15.
  */
 public class Plateau {
 
-    /**
-     * tableau à double entrée contenant les pions
-     */
     private char[][] plateau_;
 
-    /**
-     * Contructeur de la classe fr.algo.hexgame.Plateau
-     */
     public Plateau(){
         plateau_ = new char[11][11];
         for(int i = 0;i<11;++i){
@@ -26,37 +16,17 @@ public class Plateau {
         }
     }
 
-    /**
-     * Accesseur de l'attribut #plateau_
-     * @return le plateau
-     */
     public char[][] getPlateau_() {
         return plateau_;
     }
 
-    /**
-     * Retourne la valeur du propriétaire de la case
-     * @param i l'indice de la ligne
-     * @param j l'indice de la colonne
-     * @return o si la case est disponible sinon un char réprésentant un joueur
-     */
     public char estDispo(int i, int j){
         return plateau_[i][j];
     }
 
-    /**
-     * Attribue une case à un joueur
-     * @param i l'indice de la ligne
-     * @param j l'indice de la colonne
-     * @param nom le caractère représentant le joueur
-     */
     public void setDispo(int i, int j, char nom){
             plateau_[i][j] = nom;
     }
-
-    /**
-     * Méthode qui affiche le plateau
-     */
 	public void afficher(){
         int w;
         int j;
@@ -76,16 +46,7 @@ public class Plateau {
         System.out.println(build.toString());
 	}
 
-    /**
-     * Calcul le plus court chemin entre deux pions d'un même joueur
-     * @param x1 indice de la ligne du pion 1
-     * @param y1 indice de la colonne du pion 1
-     * @param x2 indice de la ligne du pion 2
-     * @param y2 indice de la colonne du pion 2
-     * @param nom le caractère représentant le joueur
-     * @param j le joueur
-     * @return
-     */
+    //calculDistance dans plateau car il est nécessaire d'avoir la vision d'ensemble de celui ci. cad on a besoin de savoir a qui appartiennent les cases.
     public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
         boolean[] marqueur = new boolean[123];
         boolean trouve = false;
@@ -239,12 +200,39 @@ public class Plateau {
        return pion-1;
     }
 
-    /**
-     * Retourne la liste des voisins d'un pion
-     * @param x indice de la ligne
-     * @param y indice de la colonne
-     * @return la liste des voisins
-     */
+    public int calculDistance2(int x1, int y1,int x2,int y2, char nom, Joueur j){
+        ArrayList<Integer> list= new ArrayList<Integer>();
+        list.add(coordToCase(x1,y1));
+        int coor = x2*11+y2;
+        int min=126;
+        calculDistanceR2(list, coor, 0, min, nom, j);
+        return min;
+    }
+
+    private void calculDistanceR2(ArrayList<Integer> list ,int coor ,int i, int min,char nom, Joueur j) {
+        if (i < min) {
+            ArrayList<Integer> listvoisin = new ArrayList<Integer>();
+            if (list.contains(coor)) {
+                i = i + 1;
+                if (i < min) {
+                    min = i;
+                }
+            } else {
+                for (int q : list) {
+                    for (int v : voisin(q % 11, q / 11)) {
+                        if (plateau_[v / 11][v % 11] == nom) {
+                            calculDistanceR2(voisin(v / 11, v % 11), coor, i, min, nom, j);
+                        } else {
+                            calculDistanceR2(voisin(v / 11, v % 11), coor, i + 1, min, nom, j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
     public ArrayList<Integer> voisin(int x, int y){
         ArrayList<Integer> v = new ArrayList<Integer>();
         int nouvellecoor;
@@ -275,12 +263,6 @@ public class Plateau {
         return v;
     }
 
-    /**
-     * convertit une coordonnée en numéro de case
-     * @param x indice de la ligne
-     * @param y indice de la colonne
-     * @return le numéro de la case
-     */
     public int coordToCase(int x,int y){
         return x*11+y;
     }
