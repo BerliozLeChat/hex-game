@@ -1,5 +1,7 @@
+package fr.algo.hexgame;
+
 /**
- * Classe Arbre.
+ * Classe fr.algo.hexgame.Arbre.
  * Représente la structure d'un arbre
  */
 public class Arbre {
@@ -14,7 +16,7 @@ public class Arbre {
     private int elt_;
 
     /**
-     * Constructeur de la classe Arbre
+     * Constructeur de la classe fr.algo.hexgame.Arbre
      * @param pere le pere de l'arbre
      * @param elt l'élément de l'arbre
      */

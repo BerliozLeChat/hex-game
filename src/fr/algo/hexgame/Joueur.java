@@ -1,5 +1,7 @@
+package fr.algo.hexgame;
+
 /**
- * Classe Joueur
+ * Classe fr.algo.hexgame.Joueur
  * @author François Hallereau & Sullivan Pineau
  */
 public class Joueur {
