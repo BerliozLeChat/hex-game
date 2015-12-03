@@ -179,7 +179,7 @@ public class Plateau {
         {
             pion = 1000;
         }
-       return pion;
+       return pion+1;
     }
 
     /**

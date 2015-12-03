@@ -10,18 +10,18 @@ public class Main {
         Joueur joueura = new Joueur(0, "Sullivan",true);
         Joueur joueurb = new Joueur(1, "François",false);
 
-        int z;/*= 4*11 + 5;
+        int z= 5*11 + 5;
         joueura.ajoutePion(z);
-        plateau.setDispo(4,5,'A');*/
+        plateau.setDispo(5,5,'A');
 
-        /*z= 3*11 + 6;
+        z= 5*11 + 7;
         joueura.ajoutePion(z);
-        plateau.setDispo(3,5,'A');*/
+        plateau.setDispo(5,7,'A');
 
-        /*z= 0*11 + 0 ;
-        joueura.ajoutePion(z);
-        plateau.setDispo(0,0,'A');
-
+        z= 5*11 + 6 ;
+        joueurb.ajoutePion(z);
+        plateau.setDispo(5,6,'B');
+/*
         z= 3*11 + 10 ;
         joueura.ajoutePion(z);
         plateau.setDispo(3,10,'A');
@@ -57,7 +57,19 @@ public class Main {
         plateau.setDispo(4,10,'A');
         */
 
-        /*plateau.afficher();
+        plateau.afficher();
+        System.out.println(plateau.calculDistance(5, 5,5,7, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 5,6,7, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 5,8,7, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 5,9,7, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 5,10,7, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 5,5,10, 'A', joueura));
+
+
+
+
+
+
         /*for(int i : plateau.voisin(4,5))
             System.out.println(Integer.toString(i));*/
        // System.out.println(plateau.calculDistance(0,0,0,0,'A',joueura));
@@ -69,7 +81,7 @@ public class Main {
 
 
         //joueDeuxHumains(joueura,joueurb,plateau);
-        joueOrdiHumain(joueura,plateau);
+       // joueOrdiHumain(joueura,plateau);
     }
 
     public static boolean verificationCoordonnees(int x,int y){
@@ -229,7 +241,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
 
      public static int pionleplusavantageux(Joueur ordi, Joueur joueur, Plateau plateau){
         char nom = 'B';//ordi.getnom();
-        int estimationmin=evaluerPionZ(ordi, joueur, plateau, 0);
+        int estimationmin=1000;
         int estim;
         ArrayList<Integer> list = new ArrayList<Integer>();
         int i;
@@ -247,7 +259,6 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
                     list.clear();
                     estimationmin=estim;
                     list.add(i);
-                    System.out.println("ok : "+estim);
                 }else if(estimationmin==estim&&i/11<list.get(0)&&i/11>list.get(0))
                     {
                         list.add(i);
@@ -262,7 +273,6 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
         int distance =100;
         int j;
         int x2,y2,x,y;
-        System.out.println("taille : "+list.size());
         for(i=0; i<11;++i)
         {
             if(plateau.getPlateau_()[i/11][i]=='o')
