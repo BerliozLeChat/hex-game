@@ -58,15 +58,16 @@ public class Plateau {
     /**
      * Méthode qui affiche le plateau
      */
-	public void afficher(){
+    public void afficher(){
         int w;
         int j;
         StringBuilder build = new StringBuilder();
+        System.out.println("|0|1|2|3|4|5|6|7|8|9|10|");
         for(int i =0; i<11;++i)
-		{
+        {
             for(w=0;w<i;++w)
                 build.append(" ");
-            build.append("|");
+            build.append(i+"|");
             for(j=0;j<11;++j) {
                 build.append(plateau_[i][j]);
                 build.append("|");
@@ -75,7 +76,7 @@ public class Plateau {
             build.append("\n");
         }
         System.out.println(build.toString());
-	}
+    }
 
     /**
      * Calcul le plus court chemin entre deux pions d'un même joueur
@@ -91,6 +92,8 @@ public class Plateau {
     public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
         boolean[] marqueur = new boolean[123];
         boolean trouve = false;
+        boolean possededepart = false;
+        boolean possedearriver = false;
         int pion = 0;
         for(int q = 0;q<123;++q)
             marqueur[q]=false;
@@ -105,59 +108,22 @@ public class Plateau {
                 while(!fileEnCours.isEmpty()&&!trouve)
                 {
                     int s = fileEnCours.poll();
-                    for(int v : voisin(s /11,s%11)){//pour tout les voisins d'une case
-                   System.out.println("voisin de : "+v);
-                        if(v<122 && (!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]==nom ) ) ) {//il n'a pas déjà été visité
-                            if(v<11)
+                    for(int v : voisin(s /11,s%11))
+                    {//pour tout les voisins d'une case
+                   // System.out.println("voisin de : "+v);
+                        if(v<122 && (!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]==nom ) ) ) 
+                        {//il n'a pas déjà été visité
+                            if(plateau_[v/11][v%11]==nom)
                             {
-                                i=0;
-                                while(!trouve&&i<12)
-                                {
-                                    if(!marqueur[i])
-                                    {
-                                        fileAvenir.add(i);
-                                    }
-                                    marqueur[i] = true;
-                                    if(i==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                                    {
-                                        trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                                        pion--;
-                                    }
-                                    ++i;
-                                }
-                                pion++;
-                            }else if(v>110)
-                            {
-                               i=110;
-                                while(!trouve&&i<122)
-                                {
-                                    if(!marqueur[i])
-                                    {
-                                        fileAvenir.add(i);
-                                    }
-                                    marqueur[i] = true;
-                                    if(i==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                                    {
-                                        trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                                        pion--;
-                                    }
-                                    ++i;
-                                } 
-                                pion++;
+                                fileEnCours.add(v);
                             }else
                             {
-                                if(plateau_[v/11][v%11]==nom)
-                                {
-                                    fileEnCours.add(v);
-                                }else
-                                {
-                                    fileAvenir.add(v);
-                                }
-                                marqueur[v] = true;
-                                if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                                {
-                                    trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                                }
+                                fileAvenir.add(v);
+                            }
+                            marqueur[v] = true;
+                            if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
+                            {
+                                trouve = true;//c'est le cas donc on a trouvé le plus court chemin
                             }
                         }
                     }
@@ -174,60 +140,23 @@ public class Plateau {
                 while(!fileEnCours.isEmpty()&&!trouve)
                 {
                     int s = fileEnCours.poll();
-                    for(int v : voisin(s / 11,s%11)){//pour tout les voisins d'une case
-                        System.out.println("voisin de : "+v);
-                        if(v<122&&(!marqueur[v] && (plateau_[v/11][v%11]=='o'||plateau_[v%11][v/11]==nom))){//il n'a pas déjà été visité
-                            if(v % 11 == 0)
+                    for(int v : voisin(s / 11,s%11))
+                    {//pour tout les voisins d'une case
+                       // System.out.println("voisin de : "+v);
+                        if(v<122&&(!marqueur[v] && (plateau_[v/11][v%11]=='o'||plateau_[v%11][v/11]==nom)))
+                        {  //il n'a pas déjà été visité
+                            if(plateau_[v/11][v%11]==nom)
                             {
-                                i=0;
-                                while(!trouve&&i<12)
-                                {
-                                    if(!marqueur[i])
-                                    {
-                                        fileAvenir.add(i*11);
-                                    }
-                                    marqueur[i*11] = true;
-                                    if(i*11==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                                    {
-                                        trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                                        pion--;
-                                    }
-                                    ++i;
-                                }
-                                pion++;
-                            }else if(v%11 == 10)
-                            {
-                               i=0;
-                                while(!trouve&&i<12)
-                                {
-                                    if(!marqueur[i])
-                                    {
-                                        fileAvenir.add(i*11+10);
-                                    }
-                                    marqueur[i*11+10] = true;
-                                    if(i*11+10==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                                    {
-                                        trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                                        pion--;
-                                    }
-                                    ++i;
-                                } 
-                                pion++;
+                                fileEnCours.add(v);
                             }else
-                                {
-                                    if(plateau_[v/11][v%11]==nom)
-                                    {
-                                        fileEnCours.add(v);
-                                    }else
-                                    {
-                                        fileAvenir.add(v);
-                                    }
-                                    marqueur[v] = true;
-                                    if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                                    {
-                                        trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                                    }
-                                }
+                            {
+                                fileAvenir.add(v);
+                            }
+                            marqueur[v] = true;
+                            if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
+                            {
+                                trouve = true;//c'est le cas donc on a trouvé le plus court chemin
+                            }
                         }
                     }
                 }
@@ -237,8 +166,20 @@ public class Plateau {
                     pion++;
                 }
            } while( !fileEnCours.isEmpty() && !trouve);
-       }
-       return pion-1;
+        }
+        if(plateau_[x1][y1]!=nom)
+            pion++;
+        if(plateau_[x2][y2]!=nom)
+            pion++;
+        if((x1==x2)&&(y1==y2)&&plateau_[x2][y2]!=nom)
+            pion=1;
+        if((x1==x2)&&(y1==y2)&&plateau_[x2][y2]==nom)
+            pion=0;
+        if(!trouve)
+        {
+            pion = 1000;
+        }
+       return pion;
     }
 
     /**

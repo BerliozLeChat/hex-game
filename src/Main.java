@@ -1,5 +1,6 @@
 import hexgame.Joueur;
 import hexgame.Plateau;
+import java.util.*;
 
 import java.util.Scanner;
 
@@ -85,54 +86,233 @@ public class Main {
         return a;
     }
 
-    public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int pion){
+public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int pion){
         int estimation = 50;
-        int distance_droite = plateau.calculDistance(pion/11, pion%11,0,0, 'B', ordi);
-        int distance_gauche = plateau.calculDistance(pion/11, pion%11,10,10, 'B', ordi);
-        estimation= estimation+distance_gauche+distance_droite;
-        int distance_haut_autre = plateau.calculDistance(pion/11, pion%11,0,0, 'A', joueur);
-                 System.out.println("entré x : "+pion);
-        int distance_bas_autre = plateau.calculDistance(pion/11, pion%11,10,10, 'A', joueur); 
-        if(distance_haut_autre<2&&distance_bas_autre<2)
+        int distancexmin = 100;
+        int distanceymin=100;
+        ArrayList<Integer> bordx = new ArrayList<Integer>();
+        ArrayList<Integer> bordy = new ArrayList<Integer>();
+        ArrayList<Integer> bordxadver = new ArrayList<Integer>();
+        ArrayList<Integer> bordyadver = new ArrayList<Integer>();
+        int i;
+        int y = pion%11;
+        int x = (pion-y)/11;
+        int y2;
+        int x2;
+        if(ordi.getdirection())
         {
-            return 0;
+            for(i=0; i<11;++i)
+            {
+                if(plateau.getPlateau_()[i/11][i]=='o')
+                    bordx.add(i);
+            }
+            for(i=110;i<121;++i)
+            {
+                if(plateau.getPlateau_()[i/11][i%11]=='o')
+                    bordy.add(i);
+            }
+            i=0;
+            while(i<111)
+            {
+                if(plateau.getPlateau_()[i/11][i%11]=='o')
+                {
+                    bordxadver.add(i);
+                }
+                i=i+11;
+            }
+            i=10;
+            while(i<121)
+            {
+                if(plateau.getPlateau_()[i/11][i%11]=='o')
+                    bordyadver.add(i);
+                i=i+11;
+            }
+        }else{
+            i=0;
+            while(i<111)
+            {
+                if(plateau.getPlateau_()[i/11][i%11]=='o')
+                {
+                    bordx.add(i);
+                }
+                i=i+11;
+            }
+            i=10;
+            while(i<121)
+            {
+                if(plateau.getPlateau_()[i/11][i%11]=='o')
+                    bordy.add(i);
+                i=i+11;
+            }
+            for(i=0; i<11;++i)
+            {
+                if(plateau.getPlateau_()[i/11][i]=='o')
+                    bordxadver.add(i);
+            }
+            for(i=110;i<121;++i)
+            {
+                if(plateau.getPlateau_()[i/11][i%11]=='o')
+                    bordyadver.add(i);
+            }
+        }
+        i=0;
+        while(i<bordx.size())
+        {  
+            y2=bordx.get(i)%11;
+            x2=(bordx.get(i)-y2)/11;
+            if(distancexmin > plateau.calculDistance(x,y,x2,y2,'B',ordi))
+                distancexmin = plateau.calculDistance(x,y,x2,y2,'B',ordi);
+            ++i;
+        }
+        i=0;
+        while(i<bordy.size())
+        {
+            y2=bordy.get(i)%11;
+            x2=(bordy.get(i)-y2)/11;
+            if(distanceymin > plateau.calculDistance(x,y,x2,y2,'B',ordi))
+                distanceymin = plateau.calculDistance(x,y,x2,y2,'B',ordi);
+            ++i;
+        }
+
+        int distance = distanceymin+distancexmin;
+        //System.out.println("distancex "+distancexmin+" distancey "+distanceymin);
+        if( distance == 1 )
+        {
+            estimation = 0;
+        }
+        else
+        {
+            estimation = estimation +distance;
+            if(plateau.getPlateau_()[x][y]!='B')
+                estimation=estimation-1;
+        }
+        int distancexminadver=100;
+        int distanceyminadver=100;
+        int distanceadver;
+        i=0;
+        while(i<bordxadver.size())
+        {
+            y2=bordxadver.get(i)%11;
+            x2=(bordxadver.get(i)-y2)/11;
+            if(distancexminadver > plateau.calculDistance(x,y,x2,y2,'A',joueur))
+                distancexminadver = plateau.calculDistance(x,y,x2,y2,'A',joueur);
+            ++i;
+        }
+        i=0;
+        while(i<bordyadver.size())
+        {
+            y2=bordyadver.get(i)%11;
+            x2=(bordyadver.get(i)-y2)/11;
+            if(distanceyminadver > plateau.calculDistance(x,y,x2,y2,'A',joueur))
+                distanceyminadver = plateau.calculDistance(x,y,x2,y2,'A',joueur);
+            ++i;
+        }
+        distanceadver = distanceyminadver + distancexminadver;
+        if(distanceadver==1)
+        {
+            estimation=2;
         }else
         {
-            estimation=estimation-15+distance_haut_autre+distance_bas_autre;
-        }   
-        return estimation;
-   }
-
-    public static int pionleplusavantageux(Joueur ordi, Joueur joueur, Plateau plateau){
-        int estimationmin=evaluerPionZ(ordi, joueur, plateau, 0);
-        int pion=0;
-        int estim;
-        for(int i=1; i<121;i++)
-        {
-            if(plateau.getPlateau_()[i/11][i%11]=='o')
+            if(estimation!=1)
             {
-                pion=i;
-                System.out.println("pion  : "+i);
-                estim= evaluerPionZ(ordi, joueur, plateau, i);
-                System.out.println("estimation x : "+pion/11+" y : "+ pion%11+ " estimation "+estim);
-                if(estimationmin>estim)
+                if(distanceadver<distance)
                 {
-                    estimationmin=estim;
-                    pion=i;
+                    estimation=estimation+distanceadver-20;
+                    if(plateau.getPlateau_()[x][y]!='A')
+                        estimation=estimation-1;
                 }
             }
         }
+        //System.out.println("estimation !!!"+ distance + " advers : "+ distanceadver);
+        return estimation;
+   }
+
+     public static int pionleplusavantageux(Joueur ordi, Joueur joueur, Plateau plateau){
+        char nom = 'B';//ordi.getnom();
+        int estimationmin=evaluerPionZ(ordi, joueur, plateau, 0);
+        int estim;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int i;
+        //System.out.println("estimation !!!");
+        for(i=1; i<121;i++)
+        {
+            if(plateau.getPlateau_()[i/11][i%11]=='o'&&plateau.getPlateau_()[i/11][i%11]!='B'&&plateau.getPlateau_()[i/11][i%11]!='A')
+            {
+                //System.out.println("le pion est : "+plateau.getPlateau_()[i/11][i%11]);
+                //System.out.println("pion  : "+i);
+                estim= evaluerPionZ(ordi, joueur, plateau, i);
+                //System.out.println("estimation x : "+i/11+" y : "+ i%11+ " estimation "+estim+"estimin "+estimationmin);
+                if(estimationmin>estim)
+                {
+                    list.clear();
+                    estimationmin=estim;
+                    list.add(i);
+                    System.out.println("ok : "+estim);
+                }else if(estimationmin==estim&&i/11<list.get(0)&&i/11>list.get(0))
+                    {
+                        list.add(i);
+                    }
+            }
+        }
+        int pion = list.get(0);
+        ArrayList<Integer> bordx = new ArrayList<Integer>();
+        ArrayList<Integer> bordy = new ArrayList<Integer>();
+        int distancebut1=100;
+        int distancebut2=100;
+        int distance =100;
+        int j;
+        int x2,y2,x,y;
+        System.out.println("taille : "+list.size());
+        for(i=0; i<11;++i)
+        {
+            if(plateau.getPlateau_()[i/11][i]=='o')
+                bordx.add(i);
+        }
+        for(i=110;i<121;++i)
+        {
+            if(plateau.getPlateau_()[i/11][i%11]=='o')
+                bordy.add(i);
+        }
+        for(i=0;i<list.size();++i)
+        {
+            y=list.get(i)%11;
+            x=(list.get(i)-y)/11;            
+            for(j=0;j<bordx.size();++j)
+            {
+                y2=bordx.get(j)%11;
+                x2=(bordx.get(j)-y2)/11;
+                if(distancebut1 > plateau.calculDistance(x,y,x2,y2,'A',joueur))
+                    distancebut1 = plateau.calculDistance(x,y,x2,y2,'A',joueur);
+            }
+            for(j=0;j<bordy.size();++j)
+            {
+                y2=bordy.get(j)%11;
+                x2=(bordy.get(j)-y2)/11;
+                if(distancebut2 > plateau.calculDistance(x,y,x2,y2,'A',joueur))
+                    distancebut2 = plateau.calculDistance(x,y,x2,y2,'A',joueur);
+            }
+            if(distance>distancebut1+distancebut2)
+            {
+                pion = list.get(i);
+            }
+        }
+       // System.out.println("FINAL : estimation x : "+pion/11+" y : "+ pion%11+ "estimin "+estimationmin);
+        System.out.println("Le Bot vient d'ajouter le pion : "+pion/11+"-"+pion%11+".");
         return pion;
     }
 
     public static void joueOrdiHumain(Joueur joueura, Plateau plateau){
        Joueur joueurb = new Joueur(1, "Ordinateur",false);
-       plateau.afficher();
        int pion;
+       int x,y,z;          
+        pion=5*11+5;
+        joueurb.ajoutePion(pion);
+        joueurb.existeCheminCotes();
+        plateau.setDispo(pion/11,pion%11,'B');
+        plateau.afficher();
         while( joueura.fini()!=true && joueurb.fini()!=true)
         {
             System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
-            int x,y;
             Scanner saisieUtilisateur = new Scanner(System.in);
             x = saisie(saisieUtilisateur);
             y = saisie(saisieUtilisateur);
@@ -142,12 +322,10 @@ public class Main {
                 x = saisie(saisieUtilisateur);
                 y = saisie(saisieUtilisateur);
             }
-            int z= x*11 + y;
+            z= x*11 + y;
             joueura.ajoutePion(z);
             joueura.existeCheminCotes();
             plateau.setDispo(x,y,'A');
-            plateau.afficher();
-            System.out.println(plateau.calculDistance(0,0,10,10,'B',joueurb));
             if( joueura.fini()!=true )
             {                
                 pion=pionleplusavantageux(joueurb, joueura, plateau);
