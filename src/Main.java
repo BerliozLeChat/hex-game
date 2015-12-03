@@ -10,7 +10,7 @@ public class Main {
         Joueur joueura = new Joueur(0, "Sullivan",true);
         Joueur joueurb = new Joueur(1, "François",false);
 
-        int z= 5*11 + 5;
+        /*int z= 5*11 + 5;
         joueura.ajoutePion(z);
         plateau.setDispo(5,5,'A');
 
