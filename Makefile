@@ -15,6 +15,11 @@ run :
 	javac src/Main.java -d bin/ -cp bin/
 	cd bin && java Main
 
+.PHONY : humain
+humain :
+	javac src/HumainvsHumain.java -d bin/ -cp bin/
+	cd bin && java HumainvsHumain
+
 .PHONY : clean
 clean :
 	-rm -rf bin
