@@ -57,7 +57,7 @@ public class Main {
         plateau.setDispo(4,10,'A');
         */
 
-        plateau.afficher();
+        /*plateau.afficher();
         System.out.println(plateau.calculDistance(5, 5,5,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 5,6,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 5,8,7, 'A', joueura));
@@ -65,7 +65,7 @@ public class Main {
         System.out.println(plateau.calculDistance(5, 5,10,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 5,5,10, 'A', joueura));
 
-
+*/
 
 
 
@@ -81,7 +81,7 @@ public class Main {
 
 
         //joueDeuxHumains(joueura,joueurb,plateau);
-       // joueOrdiHumain(joueura,plateau);
+        joueOrdiHumain(joueura,plateau);
     }
 
     public static boolean verificationCoordonnees(int x,int y){
