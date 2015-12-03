@@ -167,6 +167,7 @@ public class Plateau {
                 }
            } while( !fileEnCours.isEmpty() && !trouve);
         }
+        pion++;
         if(plateau_[x1][y1]!=nom)
             pion++;
         if(plateau_[x2][y2]!=nom)
@@ -179,7 +180,7 @@ public class Plateau {
         {
             pion = 1000;
         }
-       return pion+1;
+       return pion;
     }
 
     /**
