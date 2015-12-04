@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String [] args) {
-        Plateau plateau = new Plateau();
-        Joueur joueura = new Joueur(0, "défault",true);
-        Joueur joueurb = new Joueur(1, "défault",false);
         boolean fin=false;
         int choose;
         Scanner saisieUtilisateur = new Scanner(System.in);
@@ -45,6 +42,9 @@ public class Main {
             switch(choose)
             {
                 case 1 :
+                    Plateau plateau = new Plateau();
+                    Joueur joueura = new Joueur(0, "défault",true);
+                    Joueur joueurb = new Joueur(1, "défault",false);
                     String nom1, nom2;
                     System.out.println(" Saisir les prénoms des deux joueurs");
                     System.out.println("---------------------------------------------------------");
@@ -60,18 +60,23 @@ public class Main {
                     joueDeuxHumains(joueura,joueurb,plateau);
                     break;
                 case 2 :
+                    Plateau plateau2 = new Plateau();
+                    Joueur joueura2 = new Joueur(0, "défault",true);
                     String nom;
                     System.out.println(" Saisir le prénom du joueur");
                     System.out.println("---------------------------------------------------------"); 
                     nom = saisie2(saisieUtilisateur);
-                    joueura.setnom(nom);
+                    joueura2.setnom(nom);
                     System.out.print(String.format("\033[2J"));
                     System.out.println("---------------------------------------------------------");
                     System.out.println(nom+ " s'est à vous de jouer ! Nous vous souhaitons bonne chance ! :D ");
-                    joueOrdiHumain(joueura,plateau);
+                    joueOrdiHumain(joueura2,plateau2);
                     break;
                 case 3:
-                    effectuertest(joueura,joueurb,plateau);
+                    Plateau plateau3 = new Plateau();
+                    Joueur joueura3 = new Joueur(0, "défault",true);
+                    Joueur joueurb3 = new Joueur(1, "défault",false);
+                    effectuertest(joueura3,joueurb3,plateau3);
                     System.out.print(String.format("\033[2J"));
                     break;
                 case 4 :
@@ -423,7 +428,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
      public static int pionleplusavantageux(Joueur ordi, Joueur joueur, Plateau plateau){
         char nom = 'B';//ordi.getnom();
         int estimationmin=1000;
-        int estim;
+        int estim=9999;
         ArrayList<Integer> list = new ArrayList<Integer>();
         int i;
         //System.out.println("estimation !!!");
@@ -525,11 +530,6 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             {         
                 System.out.print(String.format("\033[2J"));
                 pion=pionleplusavantageux(joueurb, joueura, plateau);
-                System.out.println("test Cotes : "+ joueurb.existeCheminCotes2());
-                for(int w=0;w<joueurb.getClasseUnion().afficheComposante(60).size();w++)
-                {
-                    System.out.println(joueurb.getClasseUnion().afficheComposante(60));
-                }
                 plateau.setDispo(pion/11,pion%11,'B');
                 pion = (pion%11)*11+((pion-pion%11)/11);
                 joueurb.ajoutePion(pion);
