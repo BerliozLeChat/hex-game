@@ -96,8 +96,6 @@ public class Plateau {
     public int calculDistance(int x1, int y1,int x2,int y2, char nom, Joueur j){
         boolean[] marqueur = new boolean[123];
         boolean trouve = false;
-        boolean possededepart = false;
-        boolean possedearriver = false;
         int pion = 0;
         for(int q = 0;q<123;++q)
             marqueur[q]=false;
