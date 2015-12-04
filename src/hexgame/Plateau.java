@@ -100,7 +100,7 @@ public class Plateau {
         LinkedList<Integer> fileEnCours = new LinkedList<Integer>();
         LinkedList<Integer> fileAvenir = new LinkedList<Integer>();
         fileEnCours.add(coordToCase(x1,y1));
-        marqueur[coordToCase(x1,y1)] = true;
+        marqueur[x1*11+y1] = true;
         int i;
         int s;
         if(j.getdirection())
@@ -111,10 +111,9 @@ public class Plateau {
                     s = fileEnCours.poll();
                     for( int v : voisin(s /11,s%11))
                     {//pour tout les voisins d'une case
-                   // System.out.println("voisin de : "+v);
-                        if(v<122 && (!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]==nom ) ) ) 
+                        if(v<122 && (!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]=='A' ) ) ) 
                         {//il n'a pas déjà été visité
-                            if(plateau_[v/11][v%11]==nom)
+                            if(plateau_[v/11][v%11]=='A')
                             {
                                 fileEnCours.add(v);
                             }else
@@ -129,6 +128,7 @@ public class Plateau {
                         }
                     }
                 }
+
                if(!trouve) {
                     fileEnCours.addAll(fileAvenir);
                     fileAvenir.clear();
@@ -169,12 +169,17 @@ public class Plateau {
                 }
            } while( !fileEnCours.isEmpty() && !trouve);
         }
+        
         if(j.getClasseUnion().existeCheminCases(x1*11+y1,x2*11+y2))
             pion=0;
         if(plateau_[x1][y1]!=nom)
+        {
             pion++;
+        }
         if(plateau_[x2][y2]!=nom)
+        {
             pion++;
+        }
         if((x1==x2)&&(y1==y2)&&plateau_[x2][y2]!=nom)
             pion=1;
         if((x1==x2)&&(y1==y2)&&plateau_[x2][y2]==nom)

@@ -9,7 +9,6 @@ public class Main {
         Plateau plateau = new Plateau();
         Joueur joueura = new Joueur(0, "défault",true);
         Joueur joueurb = new Joueur(1, "défault",false);
-
         boolean fin=false;
         int choose;
         Scanner saisieUtilisateur = new Scanner(System.in);
@@ -72,24 +71,35 @@ public class Main {
                     break;
                 case 3:
                     effectuertest(joueura,joueurb,plateau);
+                    System.out.print(String.format("\033[2J"));
                     break;
                 case 4 :
                     fin = true;
                     break;
                 }
-        }
-        /*int z= 5*11 + 4;
+        }/*
+        int z= 5*11 + 4;
         joueura.ajoutePion(z);
         plateau.setDispo(5,4,'A');
 
         z= 5*11 + 6;
         joueura.ajoutePion(z);
         plateau.setDispo(5,6,'A');
+        z= 1*11 + 5;
+        joueura.ajoutePion(z);
+        plateau.setDispo(1,5,'A');
 
-        z= 5*11 + 6 ;
+        z= 2*11 + 5;
+        joueura.ajoutePion(z);
+        plateau.setDispo(2,5,'A');
+        z= 3*11 + 5;
+        joueura.ajoutePion(z);
+        plateau.setDispo(3,5,'A');
+        
+        z= 5*11 + 5 ;
         joueurb.ajoutePion(z);
-        plateau.setDispo(5,8,'A');
-
+        plateau.setDispo(5,5,'B');
+/*
         z= 3*11 + 10 ;
         joueura.ajoutePion(z);
         plateau.setDispo(3,10,'A');
@@ -129,9 +139,9 @@ public class Main {
         /*System.out.println(plateau.calculDistance(5, 5,5,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 5,6,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 4,5,8, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 4,3,10, 'A', joueura));/*
-        System.out.println(plateau.calculDistance(5, 5,10,7, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 5,5,10, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 4,3,10, 'A', joueura));*/
+        /*System.out.println(plateau.calculDistance(1, 5,5,6, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 4,5,6, 'A', joueura));/*
 
 */
 
@@ -481,7 +491,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             {
                 if(distanceadver<distance+4)
                 {
-                    estimation=estimation+distanceadver-20;
+                    estimation=estimation+distanceadver*2-20;
                     if(plateau.getPlateau_()[x][y]!='A')
                         estimation=estimation-1;
                 }

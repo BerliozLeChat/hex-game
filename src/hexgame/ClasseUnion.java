@@ -176,9 +176,9 @@ public class ClasseUnion {
     }
 
     /**
-     * retourne la liste des éléments qu'un pion relie quand il est posé sur le plateau
+     * retourne si la liste des éléments qu'un pion relie quand il est posé sur le plateau est plus grand de 1
      * @param c1 le pion
-     * @return la liste des éléments
+     * @return boolean 
      */
     public boolean relieComposantes(int c1){
         ArrayList<Integer> classesAdjacentes = new ArrayList<Integer>();
