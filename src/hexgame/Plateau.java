@@ -107,90 +107,60 @@ public class Plateau {
         marqueur[x1*11+y1] = true;
         int i;
         int s;
-        if(j.getdirection())
-        {
-           do{
-                while(!fileEnCours.isEmpty()&&!trouve)
-                {
-                    s = fileEnCours.poll();
-                    for( int v : voisin(s /11,s%11))
-                    {//pour tout les voisins d'une case
-                        if(v<122 && (!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]=='A' ) ) ) 
-                        {//il n'a pas déjà été visité
-                            if(plateau_[v/11][v%11]=='A')
-                            {
-                                fileEnCours.add(v);
-                            }else
-                            {
-                                fileAvenir.add(v);
-                            }
-                            marqueur[v] = true;
-                            if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                            {
-                                trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                            }
+       do{
+            while(!fileEnCours.isEmpty()&&!trouve)
+            {
+                s = fileEnCours.poll();
+                for( int v : voisin(s /11,s%11))
+                {//pour tout les voisins d'une case
+                    if(v<122 && (!marqueur[v] && (plateau_[v/11][v%11]=='o'||plateau_[v/11][v%11]==nom )) ) 
+                    {//il n'a pas déjà été visité
+                        if(plateau_[v/11][v%11]==nom)
+                        {
+                            fileEnCours.add(v);
+                        }else
+                        {
+                            fileAvenir.add(v);
+                        }
+                        marqueur[v] = true;
+                        if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
+                        {
+                            trouve = true;//c'est le cas donc on a trouvé le plus court chemin
                         }
                     }
                 }
+            }
+           if(!trouve) {
+                fileEnCours.addAll(fileAvenir);
+                fileAvenir.clear();
+                pion++;
+            }
+        } while( !fileEnCours.isEmpty() && !trouve);
 
-               if(!trouve) {
-                    fileEnCours.addAll(fileAvenir);
-                    fileAvenir.clear();
-                    pion++;
-                }
-           } while( !fileEnCours.isEmpty() && !trouve);
-       }else
-       {
-             do{
-                while(!fileEnCours.isEmpty()&&!trouve)
-                {
-                    s = fileEnCours.poll();
-
-                    for(int v : voisin(s / 11,s%11))
-                    {//pour tout les voisins d'une case
-                       // System.out.println("voisin de : "+v);
-                        if(v<122&&(!marqueur[v] && (plateau_[v/11][v%11]=='o'||plateau_[v%11][v/11]==nom)))
-                        {  //il n'a pas déjà été visité
-                            if(plateau_[v/11][v%11]==nom)
-                            {
-                                fileEnCours.add(v);
-                            }else
-                            {
-                                fileAvenir.add(v);
-                            }
-                            marqueur[v] = true;
-                            if(v==x2*11+y2)//on vérifie qu'il appartient à la composante d'arrivée
-                            {
-                                trouve = true;//c'est le cas donc on a trouvé le plus court chemin
-                            }
-                        }
-                    }
-                }
-               if(!trouve) {
-                    fileEnCours.addAll(fileAvenir);
-                    fileAvenir.clear();
-                    pion++;
-                }
-           } while( !fileEnCours.isEmpty() && !trouve);
-        }
-        
         if(j.getClasseUnion().existeCheminCases(x1*11+y1,x2*11+y2))
             pion=0;
+        // Regarde si la case départ != nom
         if(plateau_[x1][y1]!=nom)
         {
             pion++;
         }
+        // Regarde si la case arrive != nom
         if(plateau_[x2][y2]!=nom)
         {
             pion++;
         }
+        // Regarde si la case départ != nom & que la case deb = case fin
         if((x1==x2)&&(y1==y2)&&plateau_[x2][y2]!=nom)
             pion=1;
+
+        // Regarde si la case départ == nom & que la case deb = case fin
+
         if((x1==x2)&&(y1==y2)&&plateau_[x2][y2]==nom)
             pion=0;
+
         if(!trouve)
         {
-            pion = 1000;
+            pion = Integer.MAX_VALUE;
         }
        return pion;
     }

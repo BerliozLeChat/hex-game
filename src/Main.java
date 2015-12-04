@@ -28,6 +28,7 @@ public class Main {
             System.out.println("---------------------------------------------------------");
             while(choose<1||choose>4)
             {
+
                 System.out.print(String.format("\033[2J"));
                 System.out.println("---------------------------------------------------------");
                 System.out.println(" Veuillez resaisir votre choix ?");
@@ -76,90 +77,8 @@ public class Main {
                 case 4 :
                     fin = true;
                     break;
-                }
-        }/*
-        int z= 5*11 + 4;
-        joueura.ajoutePion(z);
-        plateau.setDispo(5,4,'A');
-
-        z= 5*11 + 6;
-        joueura.ajoutePion(z);
-        plateau.setDispo(5,6,'A');
-        z= 1*11 + 5;
-        joueura.ajoutePion(z);
-        plateau.setDispo(1,5,'A');
-
-        z= 2*11 + 5;
-        joueura.ajoutePion(z);
-        plateau.setDispo(2,5,'A');
-        z= 3*11 + 5;
-        joueura.ajoutePion(z);
-        plateau.setDispo(3,5,'A');
-        
-        z= 5*11 + 5 ;
-        joueurb.ajoutePion(z);
-        plateau.setDispo(5,5,'B');
-/*
-        z= 3*11 + 10 ;
-        joueura.ajoutePion(z);
-        plateau.setDispo(3,10,'A');
-
-        z= 10*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(10,10,'A');
-
-        /*z= 5*11 + 7;
-        joueura.ajoutePion(z);
-        plateau.setDispo(5,7,'A');
-        
-/*
-        z= 8*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(8,10,'A');
-        
-        z= 7*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(7,10,'A');
-        
-        z= 6*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(6,10,'A');
-        
-        z= 5*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(5,10,'A');
-        
-
-        z= 4*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(4,10,'A');
-        */
-
-        //plateau.afficher();
-        /*System.out.println(plateau.calculDistance(5, 5,5,7, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 5,6,7, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 4,5,8, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 4,3,10, 'A', joueura));*/
-        /*System.out.println(plateau.calculDistance(1, 5,5,6, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 4,5,6, 'A', joueura));/*
-
-*/
-
-
-
-
-        /*for(int i : plateau.voisin(4,5))
-            System.out.println(Integer.toString(i));*/
-       // System.out.println(plateau.calculDistance(0,0,0,0,'A',joueura));
-
-
-       /* ArrayList<Integer> list = plateau.voisin(1,1);//joueura.classe(0);//getClasseUnion().afficheComposante(0);
-        for(Integer i : list)
-            System.out.println(Integer.toString(i));*/
-
-
-        //joueDeuxHumains(joueura,joueurb,plateau);
-        //joueOrdiHumain(joueura,plateau);
+            }
+        }
     }
 
     public static void effectuertest(Joueur joueura, Joueur joueurb, Plateau plateau)
@@ -649,7 +568,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             if( joueura.fini()!=true )
             {
                 System.out.println("---------------------------------------------------------" );
-                System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
+                System.out.println(joueurb.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
                 x = saisie(saisieUtilisateur);
                 y = saisie(saisieUtilisateur);
                 while(!verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
