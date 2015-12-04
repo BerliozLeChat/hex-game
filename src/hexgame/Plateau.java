@@ -61,11 +61,15 @@ public class Plateau {
     public void afficher(){
         int w;
         int j;
+        int k;
         StringBuilder build = new StringBuilder();
         System.out.println("|0|1|2|3|4|5|6|7|8|9|10|");
         for(int i =0; i<11;++i)
         {
-            for(w=0;w<i;++w)
+            k=i;
+            if(k==10)
+                --k;
+            for(w=0;w<k;++w)
                 build.append(" ");
             build.append(i+"|");
             for(j=0;j<11;++j) {
