@@ -102,13 +102,15 @@ public class Plateau {
         fileEnCours.add(coordToCase(x1,y1));
         marqueur[coordToCase(x1,y1)] = true;
         int i;
+        int s;
+        int go=0;
         if(j.getdirection())
         {
            do{
                 while(!fileEnCours.isEmpty()&&!trouve)
                 {
-                    int s = fileEnCours.poll();
-                    for(int v : voisin(s /11,s%11))
+                    s = fileEnCours.poll();
+                    for( int v : voisin(s /11,s%11))
                     {//pour tout les voisins d'une case
                    // System.out.println("voisin de : "+v);
                         if(v<122 && (!marqueur[v] && (plateau_[v%11][v/11]=='o'||plateau_[v%11][v/11]==nom ) ) ) 
@@ -128,18 +130,22 @@ public class Plateau {
                         }
                     }
                 }
+                if(trouve&&go==0)
+                    pion--;
                if(!trouve) {
                     fileEnCours.addAll(fileAvenir);
                     fileAvenir.clear();
                     pion++;
                 }
+                go ++;
            } while( !fileEnCours.isEmpty() && !trouve);
        }else
        {
              do{
                 while(!fileEnCours.isEmpty()&&!trouve)
                 {
-                    int s = fileEnCours.poll();
+                    s = fileEnCours.poll();
+
                     for(int v : voisin(s / 11,s%11))
                     {//pour tout les voisins d'une case
                        // System.out.println("voisin de : "+v);
@@ -160,14 +166,16 @@ public class Plateau {
                         }
                     }
                 }
+                if(trouve&&go==0)
+                    pion--;
                if(!trouve) {
                     fileEnCours.addAll(fileAvenir);
                     fileAvenir.clear();
                     pion++;
                 }
+                go++;
            } while( !fileEnCours.isEmpty() && !trouve);
         }
-        pion++;
         if(plateau_[x1][y1]!=nom)
             pion++;
         if(plateau_[x2][y2]!=nom)

@@ -7,34 +7,99 @@ import java.util.Scanner;
 public class Main {
     public static void main(String [] args) {
         Plateau plateau = new Plateau();
-        Joueur joueura = new Joueur(0, "Sullivan",true);
-        Joueur joueurb = new Joueur(1, "François",false);
+        Joueur joueura = new Joueur(0, "défault",true);
+        Joueur joueurb = new Joueur(1, "défault",false);
 
-        /*int z= 5*11 + 5;
+        boolean fin=false;
+        int choose;
+        Scanner saisieUtilisateur = new Scanner(System.in);
+        System.out.print(String.format("\033[2J"));
+        while(!fin)
+        {
+            System.out.println("---------------------------------------------------------");
+            System.out.println(" Veuillez saisir votre choix ?");
+            System.out.println("---------------------------------------------------------");
+            System.out.println(" 1 - Lancer une partie 1v1 ");
+            System.out.println(" 2 - Lancer une partie contre un ordinateur mode normal ");
+            System.out.println(" 3 - Faire des tests ");
+            System.out.println(" 4 - Quitter le jeu ");
+            System.out.println("---------------------------------------------------------");
+            System.out.println("Choix : ");
+            choose = saisie(saisieUtilisateur);
+            System.out.println("---------------------------------------------------------");
+            while(choose<1||choose>4)
+            {
+                System.out.print(String.format("\033[2J"));
+                System.out.println("---------------------------------------------------------");
+                System.out.println(" Veuillez resaisir votre choix ?");
+                System.out.println("---------------------------------------------------------");
+                System.out.println(" 1 - Lancer une partie 1v1 ");
+                System.out.println(" 2 - Lancer une partie contre un ordinateur mode normal ");
+                System.out.println(" 3 - Faire des tests ");
+                System.out.println(" 4 - Quitter le jeu ");
+                System.out.println("---------------------------------------------------------");
+                System.out.println("Choix : ");
+                choose = saisie(saisieUtilisateur);
+                System.out.println("---------------------------------------------------------");    
+            }
+            switch(choose)
+            {
+                case 1 :
+                    String nom1, nom2;
+                    System.out.println(" Saisir les prénoms des deux joueurs");
+                    System.out.println("---------------------------------------------------------");
+                    nom1 = saisie2(saisieUtilisateur);
+                    nom2 =saisie2(saisieUtilisateur); 
+                    joueura.setnom(nom1);
+                    joueurb.setnom(nom2);
+                    System.out.println("---------------------------------------------------------");
+                    System.out.println(nom1+" devra jouer a la vertical, il commencera la partie.");
+                    System.out.println(nom2+" devra jouer a la horizontalement, il commencera la partie.");
+                    System.out.println("---------------------------------------------------------");
+                    System.out.println(" A vous de jouer ! Nous vous souhaitons bonne chance ! :D ");
+                    joueDeuxHumains(joueura,joueurb,plateau);
+                    break;
+                case 2 :
+                    String nom;
+                    System.out.println(" Saisir les prénoms des deux joueurs");
+                    System.out.println("---------------------------------------------------------");            
+                    nom = saisie2(saisieUtilisateur);
+                    joueura.setnom(nom);
+                    joueOrdiHumain(joueura,plateau);
+                    break;
+                case 3:
+                    effectuertest(joueura,joueurb,plateau);
+                    break;
+                case 4 :
+                    fin = true;
+                    break;
+                }
+        }
+        /*int z= 5*11 + 4;
         joueura.ajoutePion(z);
-        plateau.setDispo(5,5,'A');
+        plateau.setDispo(5,4,'A');
 
-        z= 5*11 + 7;
+        z= 5*11 + 6;
         joueura.ajoutePion(z);
-        plateau.setDispo(5,7,'A');
+        plateau.setDispo(5,6,'A');
 
         z= 5*11 + 6 ;
         joueurb.ajoutePion(z);
-        plateau.setDispo(5,6,'B');
-/*
+        plateau.setDispo(5,8,'A');
+
         z= 3*11 + 10 ;
         joueura.ajoutePion(z);
         plateau.setDispo(3,10,'A');
 
         z= 10*11 + 10;
         joueura.ajoutePion(z);
-        plateau.setDispo(10,10,'A');*/
-/*
-        z= 9*11 + 10;
-        joueura.ajoutePion(z);
-        plateau.setDispo(9,10,'A');
-        
+        plateau.setDispo(10,10,'A');
 
+        /*z= 5*11 + 7;
+        joueura.ajoutePion(z);
+        plateau.setDispo(5,7,'A');
+        
+/*
         z= 8*11 + 10;
         joueura.ajoutePion(z);
         plateau.setDispo(8,10,'A');
@@ -57,11 +122,11 @@ public class Main {
         plateau.setDispo(4,10,'A');
         */
 
-        /*plateau.afficher();
-        System.out.println(plateau.calculDistance(5, 5,5,7, 'A', joueura));
+        //plateau.afficher();
+        /*System.out.println(plateau.calculDistance(5, 5,5,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 5,6,7, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 5,8,7, 'A', joueura));
-        System.out.println(plateau.calculDistance(5, 5,9,7, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 4,5,8, 'A', joueura));
+        System.out.println(plateau.calculDistance(5, 4,3,10, 'A', joueura));/*
         System.out.println(plateau.calculDistance(5, 5,10,7, 'A', joueura));
         System.out.println(plateau.calculDistance(5, 5,5,10, 'A', joueura));
 
@@ -81,7 +146,185 @@ public class Main {
 
 
         //joueDeuxHumains(joueura,joueurb,plateau);
-        joueOrdiHumain(joueura,plateau);
+        //joueOrdiHumain(joueura,plateau);
+    }
+
+    public static void effectuertest(Joueur joueura, Joueur joueurb, Plateau plateau)
+    {
+        System.out.print(String.format("\033[2J"));
+        System.out.println("---------------------------------------------------------");
+        int choose;
+        Scanner saisieUtilisateur = new Scanner(System.in);
+        boolean fin = false;
+        int x,y;
+        boolean res;
+        int res2;
+        int x1,y1,x2,y2,c1,c2;
+        ArrayList<Integer> composante = new ArrayList<Integer>();
+        while(!fin)
+        {
+            do{
+                System.out.println("---------------------------------------------------------");
+                System.out.println(" Veuillez saisir votre choix ?");
+                System.out.println("---------------------------------------------------------");
+                System.out.println(" 1 - ajouterPion ");
+                System.out.println(" 2 - afficheComposante ");
+                System.out.println(" 3 - ExisteCheminCases ");
+                System.out.println(" 4 - ExisteCheminCotes ");
+                System.out.println(" 5 - RelieComposantes ");
+                System.out.println(" 6 - calculDistance ");
+                System.out.println(" 7 - Stopper les tests");
+                System.out.println("---------------------------------------------------------");
+                System.out.println("Choix : ");
+                choose = saisie(saisieUtilisateur);
+                System.out.println("---------------------------------------------------------");
+            }while(choose<0||choose>8);
+
+            switch(choose)
+            {
+                
+                case 1 :
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y ");
+                    x = saisie(saisieUtilisateur);
+                    y = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x = saisie(saisieUtilisateur);
+                        y = saisie(saisieUtilisateur);
+                    }
+                    int z= x*11 + y;
+                    joueura.ajoutePion(z);
+                    plateau.setDispo(x,y,'A');
+                    plateau.afficher();
+                    break;
+                
+                case 2 :
+                    plateau.afficher();
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y pour la première case");
+                    x = saisie(saisieUtilisateur);
+                    y = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x,y) )
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x = saisie(saisieUtilisateur);
+                        y = saisie(saisieUtilisateur);
+                    }
+                    c1= x*11 + y;
+                    composante = joueura.getClasseUnion().afficheComposante(c1);
+                    System.out.println("Voici la liste :" );
+                    for(int i =0; i<composante.size();++i)
+                    {
+                        y2=composante.get(i)%11;
+                        x2=(composante.get(i)-y2)/11;
+                        System.out.println(x2+"-"+y2);
+                    }
+                    break;
+                case 3 :
+                    plateau.afficher();
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y pour la première case");
+                    x = saisie(saisieUtilisateur);
+                    y = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x,y) )
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x = saisie(saisieUtilisateur);
+                        y = saisie(saisieUtilisateur);
+                    }
+                    c1= x*11 + y;
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y pour la seconde case");
+                    x = saisie(saisieUtilisateur);
+                    y = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x,y) )
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x = saisie(saisieUtilisateur);
+                        y = saisie(saisieUtilisateur);
+                    }
+                    c2= x*11 + y;
+                    res = joueura.existeCheminCase(c1,c2);
+                    System.out.println("ExisteCheminCases ? "+res);
+                    break;
+                
+                case 4 :
+                    plateau.afficher();
+                    res = joueura.existeCheminCotes2();
+                    System.out.println("ExisteCheminCotes ? "+res);
+                    break;
+                
+                case 5 :
+                    plateau.afficher();
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y pour la première case");
+                    x = saisie(saisieUtilisateur);
+                    y = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x,y) )
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x = saisie(saisieUtilisateur);
+                        y = saisie(saisieUtilisateur);
+                    }
+                    c1= x*11 + y;
+                    composante = joueura.getClasseUnion().relieComposantes(c1);
+                    System.out.println("Voici la liste :" );
+                    for(int i =0; i<composante.size();++i)
+                    {
+                        y2=composante.get(i)%11;
+                        x2=(composante.get(i)-y2)/11;
+                        System.out.println(x2+"-"+y2);
+                    }
+                    break;
+                
+                case 6 :
+                    plateau.afficher();
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y pour la première case");
+                    x1 = saisie(saisieUtilisateur);
+                    y1 = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x1,y1) )
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x1 = saisie(saisieUtilisateur);
+                        y1 = saisie(saisieUtilisateur);
+                    }
+                    System.out.println("---------------------------------------------------------" );
+                    System.out.println("Veuillez saisir les coordonnées x et y pour la seconde case");
+                    x2 = saisie(saisieUtilisateur);
+                    y2 = saisie(saisieUtilisateur);
+                    System.out.println("---------------------------------------------------------");
+                    while( !verificationCoordonnees(x2,y2))
+                    {
+                        System.out.println("---------------------------------------------------------" );
+                        System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
+                        x2 = saisie(saisieUtilisateur);
+                        y2 = saisie(saisieUtilisateur);
+                    }
+                    res2 = plateau.calculDistance(x1,y1,x2,y2, 'A',joueura);
+                    System.out.println("Longueur entre " +x1+" " + y1 +  " et " +x2+" " +y2 + " est de : "+res2+".");
+                    break;
+                
+                case 7 :
+                    fin =true;
+                    break;
+            }
+        }
+
     }
 
     public static boolean verificationCoordonnees(int x,int y){
@@ -95,6 +338,12 @@ public class Main {
                 scan.next();
             }
             a = scan.nextInt();
+        return a;
+    }
+
+    public static String saisie2(Scanner scan){
+        String a;
+        a = scan.next();
         return a;
     }
 
@@ -322,12 +571,15 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
         plateau.afficher();
         while( joueura.fini()!=true && joueurb.fini()!=true)
         {
+            System.out.println("---------------------------------------------------------" );
             System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
             Scanner saisieUtilisateur = new Scanner(System.in);
             x = saisie(saisieUtilisateur);
             y = saisie(saisieUtilisateur);
+            System.out.println("---------------------------------------------------------");
             while( !verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
             {
+                System.out.println("---------------------------------------------------------" );
                 System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
                 x = saisie(saisieUtilisateur);
                 y = saisie(saisieUtilisateur);
@@ -337,13 +589,15 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             joueura.existeCheminCotes();
             plateau.setDispo(x,y,'A');
             if( joueura.fini()!=true )
-            {                
+            {         
+                System.out.print(String.format("\033[2J"));
                 pion=pionleplusavantageux(joueurb, joueura, plateau);
                 joueurb.ajoutePion(pion);
                 joueurb.existeCheminCotes();
                 plateau.setDispo(pion/11,pion%11,'B');
-                plateau.afficher();
             }
+            System.out.println("---------------------------------------------------------");
+            plateau.afficher();
         }
         if(joueura.fini()==true)
         {
@@ -354,9 +608,12 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
     }
 
     public static void joueDeuxHumains(Joueur joueura, Joueur joueurb, Plateau plateau){
+        System.out.print(String.format("\033[2J"));
+        System.out.println("---------------------------------------------------------" );
         plateau.afficher();
         while( joueura.fini()!=true && joueurb.fini()!=true)
         {
+            System.out.println("---------------------------------------------------------" );
             System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
             int x,y;
             Scanner saisieUtilisateur = new Scanner(System.in);
@@ -364,6 +621,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             y = saisie(saisieUtilisateur);
             while( !verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
             {
+                System.out.println("---------------------------------------------------------" );
                 System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
                 x = saisie(saisieUtilisateur);
                 y = saisie(saisieUtilisateur);
@@ -372,15 +630,18 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             joueura.ajoutePion(z);
             joueura.existeCheminCotes();
             plateau.setDispo(x,y,'A');
+            System.out.print(String.format("\033[2J"));
+            System.out.println("---------------------------------------------------------" );
             plateau.afficher();
-            System.out.println(plateau.calculDistance(11,0,0,0,'B',joueurb));
             if( joueura.fini()!=true )
             {
-                System.out.println(joueurb.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
+                System.out.println("---------------------------------------------------------" );
+                System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
                 x = saisie(saisieUtilisateur);
                 y = saisie(saisieUtilisateur);
                 while(!verificationCoordonnees(x,y) || !( plateau.estDispo(x,y)=='o'))
                 {
+                    System.out.println("---------------------------------------------------------" );
                     System.out.println("La case n'est pas disponible veuillez redonner des coordonnées !!!");
                     x = saisie(saisieUtilisateur);
                     y = saisie(saisieUtilisateur);
@@ -389,9 +650,12 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
                 joueurb.ajoutePion(z);
                 joueurb.existeCheminCotes();
                 plateau.setDispo(x,y,'B');
+                System.out.print(String.format("\033[2J"));
+                System.out.println("---------------------------------------------------------" );
                 plateau.afficher();
             }
         }
+        System.out.println("---------------------------------------------------------" );
         if(joueura.fini()==true)
         {
             System.out.println(joueura.getNom_()+" a gagné !! ");
@@ -400,3 +664,4 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
         }
     }
 }
+

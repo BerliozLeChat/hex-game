@@ -72,6 +72,14 @@ public class Joueur {
     }
 
     /**
+     * setteur de l'attribut nom
+     * @see #nom_
+     */
+    public void setnom(String  nom) {
+        nom_=nom;
+    }
+
+    /**
      * Accesseur de l'attribut fini
      * @return la condition de victoire
      * @see #fini_
@@ -94,6 +102,15 @@ public class Joueur {
      */
     public void existeCheminCotes(){
         fini_ = ClasseUnion_.existeCheminCotes();
+    }
+
+    /**
+     * stocke dans l'attribut fini si il existe un chemin entre les deux extrémités du plateau
+     * @return vrai si un chemin existe faux sinon
+     * @see ClasseUnion#existeCheminCotes()
+     */
+    public boolean existeCheminCotes2(){
+        return ClasseUnion_.existeCheminCotes();
     }
 
     /**
