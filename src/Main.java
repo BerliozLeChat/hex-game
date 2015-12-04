@@ -484,6 +484,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             }
             if(distance>distancebut1+distancebut2)
             {
+                distance=distancebut1+distancebut2;
                 pion = list.get(i);
             }
         }
@@ -524,9 +525,16 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             {         
                 System.out.print(String.format("\033[2J"));
                 pion=pionleplusavantageux(joueurb, joueura, plateau);
+                System.out.println("test Cotes : "+ joueurb.existeCheminCotes2());
+                for(int w=0;w<joueurb.getClasseUnion().afficheComposante(60).size();w++)
+                {
+                    System.out.println(joueurb.getClasseUnion().afficheComposante(60));
+                }
+                plateau.setDispo(pion/11,pion%11,'B');
+                pion = (pion%11)*11+((pion-pion%11)/11);
                 joueurb.ajoutePion(pion);
                 joueurb.existeCheminCotes();
-                plateau.setDispo(pion/11,pion%11,'B');
+
             }
             System.out.println("---------------------------------------------------------");
             plateau.afficher();
