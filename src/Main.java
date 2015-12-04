@@ -415,7 +415,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             {
                 if(distanceadver<distance+4)
                 {
-                    estimation=estimation+distanceadver*2-20;
+                    estimation=estimation+distanceadver*3-9;
                     if(plateau.getPlateau_()[x][y]!='A')
                         estimation=estimation-1;
                 }
