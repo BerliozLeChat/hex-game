@@ -427,8 +427,8 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
 
      public static int pionleplusavantageux(Joueur ordi, Joueur joueur, Plateau plateau){
         char nom = 'B';//ordi.getnom();
-        int estimationmin=1000;
-        int estim=9999;
+        int estimationmin=Integer.MAX_VALUE;
+        int estim=Integer.MAX_VALUE;
         ArrayList<Integer> list = new ArrayList<Integer>();
         int i;
         //System.out.println("estimation !!!");
