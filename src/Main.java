@@ -279,13 +279,13 @@ public class Main {
                         y = saisie(saisieUtilisateur);
                     }
                     c1= x*11 + y;
-                    composante = joueura.getClasseUnion().relieComposantes(c1);
-                    System.out.println("Voici la liste :" );
-                    for(int i =0; i<composante.size();++i)
+                    res = joueura.getClasseUnion().relieComposantes(c1);
+                    if(res)
                     {
-                        y2=composante.get(i)%11;
-                        x2=(composante.get(i)-y2)/11;
-                        System.out.println(x2+"-"+y2);
+                        System.out.println("le pion "+x+"-"+y+" relie bien plus de deux composantes.");
+                    }else
+                    {
+                        System.out.println("le pion "+x+"-"+y+" relie moins de deux composantes.");
                     }
                     break;
                 

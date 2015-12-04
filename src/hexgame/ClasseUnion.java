@@ -180,7 +180,7 @@ public class ClasseUnion {
      * @param c1 le pion
      * @return la liste des éléments
      */
-    public ArrayList<Integer> relieComposantes(int c1){
+    public boolean relieComposantes(int c1){
         ArrayList<Integer> classesAdjacentes = new ArrayList<Integer>();
         if(c1>-1&&c1<11){// c1  est sur la première ligne
             classesAdjacentes.add(classe(EXTREME1));
@@ -258,7 +258,7 @@ public class ClasseUnion {
             }
         }
 
-        return classesAdjacentes;
+        return (classesAdjacentes.size()>1);
     }
 
     /**
