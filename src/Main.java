@@ -16,7 +16,7 @@ public class Main {
             System.out.println(" Veuillez saisir votre choix ?");
             System.out.println("---------------------------------------------------------");
             System.out.println(" 1 - Lancer une partie 1v1 ");
-            System.out.println(" 2 - Lancer une partie contre un ordinateur en mode Attaquant + déffensif ");
+            System.out.println(" 2 - Lancer une partie contre un ordinateur en mode Attaquant + Défensif ");
             System.out.println(" 3 - Faire des tests ");
             System.out.println(" 4 - Quitter le jeu ");
             System.out.println("---------------------------------------------------------");
@@ -31,7 +31,7 @@ public class Main {
                 System.out.println(" Veuillez resaisir votre choix ?");
                 System.out.println("---------------------------------------------------------");
                 System.out.println(" 1 - Lancer une partie 1v1 ");
-                System.out.println(" 2 - Lancer une partie contre un ordinateur en mode Attaquant + déffensif ");
+                System.out.println(" 2 - Lancer une partie contre un ordinateur en mode Attaquant + Défensif ");
                 System.out.println(" 3 - Faire des tests ");
                 System.out.println(" 4 - Quitter le jeu ");
                 System.out.println("---------------------------------------------------------");
@@ -43,8 +43,8 @@ public class Main {
             {
                 case 1 :
                     Plateau plateau = new Plateau();
-                    Joueur joueura = new Joueur(0, "défault",true);
-                    Joueur joueurb = new Joueur(1, "défault",false);
+                    Joueur joueura = new Joueur("default",true);
+                    Joueur joueurb = new Joueur("default",false);
                     String nom1, nom2;
                     System.out.println(" Saisir les prénoms des deux joueurs");
                     System.out.println("---------------------------------------------------------");
@@ -61,7 +61,7 @@ public class Main {
                     break;
                 case 2 :
                     Plateau plateau2 = new Plateau();
-                    Joueur joueura2 = new Joueur(0, "défault",true);
+                    Joueur joueura2 = new Joueur("default",true);
                     String nom;
                     System.out.println(" Saisir le prénom du joueur");
                     System.out.println("---------------------------------------------------------"); 
@@ -74,8 +74,8 @@ public class Main {
                     break;
                 case 3:
                     Plateau plateau3 = new Plateau();
-                    Joueur joueura3 = new Joueur(0, "défault",true);
-                    Joueur joueurb3 = new Joueur(1, "défault",false);
+                    Joueur joueura3 = new Joueur("default",true);
+                    Joueur joueurb3 = new Joueur("default",false);
                     effectuertest(joueura3,joueurb3,plateau3);
                     System.out.print(String.format("\033[2J"));
                     break;
@@ -265,7 +265,7 @@ public class Main {
     }
 
     public static boolean verificationCoordonnees(int x,int y){
-        return x>=-1&&x<11 && y>=-1&&y<11?true:false;
+        return x>=-1&&x<11 && y>=-1&&y<11;
     }
 
     public static int saisie(Scanner scan){
@@ -499,7 +499,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
     }
 
     public static void joueOrdiHumain(Joueur joueura, Plateau plateau){
-       Joueur joueurb = new Joueur(1, "Ordinateur",false);
+       Joueur joueurb = new Joueur("Ordinateur",false);
        int pion;
        int x,y,z;          
         pion=5*11+5;
@@ -507,7 +507,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
         joueurb.existeCheminCotes();
         plateau.setDispo(pion/11,pion%11,'B');
         plateau.afficher();
-        while( joueura.fini()!=true && joueurb.fini()!=true)
+        while( !joueura.fini() && !joueurb.fini())
         {
             System.out.println("---------------------------------------------------------" );
             System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
@@ -526,7 +526,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             joueura.ajoutePion(z);
             joueura.existeCheminCotes();
             plateau.setDispo(x,y,'A');
-            if( joueura.fini()!=true )
+            if( !joueura.fini() )
             {         
                 System.out.print(String.format("\033[2J"));
                 pion=pionleplusavantageux(joueurb, joueura, plateau);
@@ -539,7 +539,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             System.out.println("---------------------------------------------------------");
             plateau.afficher();
         }
-        if(joueura.fini()==true)
+        if(joueura.fini())
         {
             System.out.println(joueura.getNom_()+" a gagné !! ");
         }else{
@@ -551,7 +551,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
         System.out.print(String.format("\033[2J"));
         System.out.println("---------------------------------------------------------" );
         plateau.afficher();
-        while( joueura.fini()!=true && joueurb.fini()!=true)
+        while( !joueura.fini() && !joueurb.fini())
         {
             System.out.println("---------------------------------------------------------" );
             System.out.println(joueura.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
@@ -573,7 +573,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             System.out.print(String.format("\033[2J"));
             System.out.println("---------------------------------------------------------" );
             plateau.afficher();
-            if( joueura.fini()!=true )
+            if( !joueura.fini() )
             {
                 System.out.println("---------------------------------------------------------" );
                 System.out.println(joueurb.getNom_()+", c'est à vous de jouer, veuillez saisir les coordonnées x et y ");
@@ -596,7 +596,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
             }
         }
         System.out.println("---------------------------------------------------------" );
-        if(joueura.fini()==true)
+        if(joueura.fini())
         {
             System.out.println(joueura.getNom_()+" a gagné !! ");
         }else{

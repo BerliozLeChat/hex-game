@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Test {
     public static void main(String [] args) {
         Plateau plateau = new Plateau();
-        Joueur joueura = new Joueur(0, "Sullivan",true);
-        Joueur joueurb = new Joueur(1, "François",false);
+        Joueur joueura = new Joueur("Sullivan",true);
+        Joueur joueurb = new Joueur("François",true);
         AjoutPion(plateau,joueura);
         afficheComposante(plateau,joueura);
         calculDistance(plateau,joueura,joueurb);

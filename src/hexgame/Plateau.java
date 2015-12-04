@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Classe Plateau.
  * Défini le plateau de jeu sur lequel repose les pions
- * @author François Hallereau & Sullivan Pineau
+ * @author François Hallereau &amp; Sullivan Pineau
  */
 public class Plateau {
 
@@ -137,7 +137,7 @@ public class Plateau {
             }
         } while( !fileEnCours.isEmpty() && !trouve);
 
-        if(j.getClasseUnion().existeCheminCases(x1*11+y1,x2*11+y2))
+        if(j.getClasseUnion().existeCheminCases(x1 * 11 + y1, x2 * 11+y2))
             pion=0;
         // Regarde si la case départ != nom
         if(plateau_[x1][y1]!=nom)

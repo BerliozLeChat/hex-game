@@ -3,7 +3,7 @@ package hexgame;
 import java.util.ArrayList;
 /**
  * Structure Classe-Union
- * @author François Hallereau & Sullivan Pineau
+ * @author François Hallereau &amp; Sullivan Pineau
  */
 public class ClasseUnion {
     /**
@@ -178,7 +178,7 @@ public class ClasseUnion {
     /**
      * retourne si la liste des éléments qu'un pion relie quand il est posé sur le plateau est plus grand de 1
      * @param c1 le pion
-     * @return boolean 
+     * @return vrai si au moins deux composantes sont reliés
      */
     public boolean relieComposantes(int c1){
         ArrayList<Integer> classesAdjacentes = new ArrayList<Integer>();

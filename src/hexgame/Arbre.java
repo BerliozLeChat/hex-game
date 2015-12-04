@@ -3,6 +3,7 @@ package hexgame;
 /**
  * Classe Arbre.
  * Représente la structure d'un arbre.
+ * @author François Hallereau &amp; Sullivan Pineau
  */
 public class Arbre {
     /**

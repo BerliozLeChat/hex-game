@@ -2,13 +2,9 @@ package hexgame;
 
 /**
  * Classe Joueur
- * @author François Hallereau & Sullivan Pineau
+ * @author François Hallereau &amp; Sullivan Pineau
  */
 public class Joueur {
-    /**
-     * le type de joueur
-     */
-    private int type_;
 
     /**
      * le nom du joueur
@@ -32,26 +28,16 @@ public class Joueur {
 
     /**
      * constructeur de la classe joueur
-     * @param type le type du joueur
      * @param nom le nom du joueur
      * @param direction la direction du joueur
      */
-    public Joueur(int type, String nom, boolean direction){
-        type_ = type;
+    public Joueur(String nom, boolean direction){
         nom_ = nom;
-        direction_=direction; // true vertical 
+        direction_=direction; // true vertical
 		fini_ = false;
 		ClasseUnion_ = new ClasseUnion();
     }
 
-    /**
-     * Accesseur de l'attribut type
-     * @return le type
-     * @see #type_
-     */
-    public int getType_() {
-        return type_;
-    }
 
     /**
      * Accesseur de l'attribut direction
