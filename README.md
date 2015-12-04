@@ -1,6 +1,6 @@
 Hex-Game
 ==============
-Ce projet est l'implémentation du jeu de l'hexagone dans le cadre de la matière **Algorithme et Structures de Données 3**
+Ce projet est l'implémentation du jeu de l'Hexagone dans le cadre de la matière **Algorithme et Structures de Données 3**
 
 Collaborateurs
 --------------
