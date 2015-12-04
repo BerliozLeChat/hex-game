@@ -20,7 +20,7 @@ public class Main {
             System.out.println(" Veuillez saisir votre choix ?");
             System.out.println("---------------------------------------------------------");
             System.out.println(" 1 - Lancer une partie 1v1 ");
-            System.out.println(" 2 - Lancer une partie contre un ordinateur mode normal ");
+            System.out.println(" 2 - Lancer une partie contre un ordinateur en mode Attaquant + déffensif ");
             System.out.println(" 3 - Faire des tests ");
             System.out.println(" 4 - Quitter le jeu ");
             System.out.println("---------------------------------------------------------");
@@ -34,7 +34,7 @@ public class Main {
                 System.out.println(" Veuillez resaisir votre choix ?");
                 System.out.println("---------------------------------------------------------");
                 System.out.println(" 1 - Lancer une partie 1v1 ");
-                System.out.println(" 2 - Lancer une partie contre un ordinateur mode normal ");
+                System.out.println(" 2 - Lancer une partie contre un ordinateur en mode Attaquant + déffensif ");
                 System.out.println(" 3 - Faire des tests ");
                 System.out.println(" 4 - Quitter le jeu ");
                 System.out.println("---------------------------------------------------------");
@@ -61,10 +61,13 @@ public class Main {
                     break;
                 case 2 :
                     String nom;
-                    System.out.println(" Saisir les prénoms des deux joueurs");
-                    System.out.println("---------------------------------------------------------");            
+                    System.out.println(" Saisir le prénom du joueur");
+                    System.out.println("---------------------------------------------------------"); 
                     nom = saisie2(saisieUtilisateur);
                     joueura.setnom(nom);
+                    System.out.print(String.format("\033[2J"));
+                    System.out.println("---------------------------------------------------------");
+                    System.out.println(nom+ " s'est à vous de jouer ! Nous vous souhaitons bonne chance ! :D ");
                     joueOrdiHumain(joueura,plateau);
                     break;
                 case 3:
@@ -476,7 +479,7 @@ public static int evaluerPionZ(Joueur ordi, Joueur joueur, Plateau plateau, int 
         {
             if(estimation!=1)
             {
-                if(distanceadver<distance)
+                if(distanceadver<distance+4)
                 {
                     estimation=estimation+distanceadver-20;
                     if(plateau.getPlateau_()[x][y]!='A')

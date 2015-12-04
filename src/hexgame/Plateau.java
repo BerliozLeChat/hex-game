@@ -103,7 +103,6 @@ public class Plateau {
         marqueur[coordToCase(x1,y1)] = true;
         int i;
         int s;
-        int go=0;
         if(j.getdirection())
         {
            do{
@@ -130,14 +129,11 @@ public class Plateau {
                         }
                     }
                 }
-                if(trouve&&go==0)
-                    pion--;
                if(!trouve) {
                     fileEnCours.addAll(fileAvenir);
                     fileAvenir.clear();
                     pion++;
                 }
-                go ++;
            } while( !fileEnCours.isEmpty() && !trouve);
        }else
        {
@@ -166,16 +162,15 @@ public class Plateau {
                         }
                     }
                 }
-                if(trouve&&go==0)
-                    pion--;
                if(!trouve) {
                     fileEnCours.addAll(fileAvenir);
                     fileAvenir.clear();
                     pion++;
                 }
-                go++;
            } while( !fileEnCours.isEmpty() && !trouve);
         }
+        if(j.getClasseUnion().existeCheminCases(x1*11+y1,x2*11+y2))
+            pion=0;
         if(plateau_[x1][y1]!=nom)
             pion++;
         if(plateau_[x2][y2]!=nom)
